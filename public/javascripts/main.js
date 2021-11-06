@@ -306,6 +306,9 @@ $(document).ready(function () {
   $('#accept_limit_people-btn').click(function(){
     $('#staticBackdrop').hide();
   })
+  $('.with-sidebar-container').scroll(function(){
+    $('#myTab').addClass('scroll');
+  })
 });
 //# sourceMappingURL=imageMapResizer.map
 
