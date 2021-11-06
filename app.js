@@ -11,7 +11,6 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // connect to db
-var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tdtusocialmedia');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
