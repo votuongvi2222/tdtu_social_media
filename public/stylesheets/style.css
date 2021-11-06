@@ -2315,8 +2315,12 @@ span.post_cancel-label {
   background-color: rgb(11, 72, 117, .9);
   color: rgba(255,255,255,1)
 }
-.upload_post-tab:hover {
+.upload_post-tab.empty:hover {
   background-color: rgba(11, 72, 117, .09);
+  cursor: context-menu;
+}
+.upload_post-tab:not(.empty):hover {
+  background-color: rgb(11, 72, 117, 1);
 }
 .hiden_upload_post-btn {
   background-image: radial-gradient(circle farthest-side,rgba(255,255,255,0.322),rgba(255,255,255,0.322) 80%,rgba(255,255,255,0) 100%);
