@@ -3,16 +3,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'home' });
+  res.render('home', { title: 'Home' });
 });
 router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'login' });
+  res.render('login', { title: 'Login' });
 });
 router.get('/add', function(req, res, next) {
-  res.render('post-form', { title: 'add' });
+  res.render('post-form', { title: 'Notification form' });
 });
-// router.get('/', function(req, res, next) {
-//   res.render('home', { title: 'home' });
-// });
+router.get('/about', function(req, res, next) {
+  res.render('howitworks', { title: 'How it works' });
+});
 
 module.exports = router;

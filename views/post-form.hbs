@@ -1,60 +1,12 @@
 
 <div class="background-cover"></div>
-<div class="hidden">
-    <div class="wrapper form-div col-md-4 offset-md-4">
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="close-icon bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-        </svg>
-        <div class="title-text">
-            <div class="title join">Join Class</div>
-            <div class="title create">Create Class</div>
-            
-        </div>
-        <div class="form-container">
-            <div class="slide-controls">
-            <input type="radio" name="slide" id="join" checked>
-            <input type="radio" name="slide" id="create">
-            <label for="join" class="slide join">Join</label>
-            <label for="create" class="slide create">Create</label>
-            <div class="slider-tab"></div>
-            </div>
-            <div class="form-inner">
-            <form action="" class="join" method="POST">
-                <div class="field">
-                <p>Ask your teacher for class code</p>
-                <input type="text" placeholder="Class Code" name="code" required>
-                </div>
-                <div class="field btn">
-                <div class="btn-layer"></div>
-                <input type="submit" name="join-class-btn" value="Join">
-                </div>
-            </form>
-            <form action="" class="create" method="POST">
-                <div class="field">
-                <input type="text" name="subject" placeholder="Subject" required>
-                </div>
-                <div class="field">
-                <input type="text" name="semester" placeholder="Semester" >
-                </div>
-                <div class="field">
-                <input type="text" name="room" placeholder="Room" >
-                </div>
-                <div class="field btn">
-                <div class="btn-layer"></div>
-                <input type="submit" name="create-class-btn" value="Create">
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
-</div>
 <div id="wrap" class="wrap-nicescroll">
     <div class="top-bar">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6 hidden-xs">
                     <ul class="nav top-nav nav-left" id="menu-left-top-bar">
-                        <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">CALENDAR</a></li>
                     </ul>
                 </div>
@@ -86,7 +38,7 @@
 
             <div class="row">
                 <div class="logo col-md-4">
-                    <a href="#">
+                    <a href="/">
                         <img src="images/logo.png" alt="" class="logo-default lazyloaded">
                     </a>
                 </div>
@@ -94,13 +46,13 @@
                     <div class="header-menu">
                         <ul class="nav justify-content-end">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">How it works?</a>
+                                <a class="nav-link active" href="/about">How it works?</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Notification</a>
                             </li>
                             <li class="nav-item menu-item-pq">
-                                <a class="nav-link add_noti-btn" id="add_noti-btn" href="#">Add Notification</a>
+                                <a class="nav-link add_noti-btn" id="add_noti-btn" href="/add">Add Notification</a>
                             </li>
                         </ul>
                     </div>
@@ -111,16 +63,16 @@
                     </div>
                     <ul>
                         <li>
-                            <a href="#">How it works?</a>
+                            <a href="/about">How it works?</a>
                         </li>
                         <li>
-                            <a href="#">Classes</a>
+                            <a href="#">Notification</a>
                         </li>
                         <li>
                             <a href="#">Calendar</a>
                         </li>
                         <li class="menu-item-pq">
-                            <a id="mobile_add_noti-btn" class="add_noti-btn" href="#">Add Notification</a>
+                            <a id="mobile_add_noti-btn" class="add_noti-btn" href="/add">Add Notification</a>
                         </li>
                     </ul>
                 </nav>
@@ -137,13 +89,11 @@
                     Notification Form
                     </h1>
                     <div class="crumbs col-md-6">
-                        <a href="">Home</a>
+                        <a href="/">Home</a>
                         <span class="crumbs-span">/</span>
-                        <a href="">Classes</a>
+                        <a href="">Notification</a>
                         <span class="crumbs-span">/</span>
-                        <a href="">
-                        Họa tranh
-                        </a>
+                        <a href="">Họa tranh</a>
                         <span class="crumbs-span">/</span>
                         <span class="current">Notification Form</span>
                         
