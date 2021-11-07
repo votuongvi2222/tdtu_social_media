@@ -779,7 +779,8 @@ ul#myTab.nav-tabs.scroll {
 }
 .sidebar h3.widget_title {
   padding: 16px !important;
-  font-size: 15px;
+  font-size: 17px;
+  cursor: pointer;
   font-weight: 400;
   color: #191919 !important;
   text-transform: capitalize;
@@ -788,6 +789,11 @@ ul#myTab.nav-tabs.scroll {
   margin-left: -20px !important;
   margin-right: -20px !important;
   border-bottom: 1px solid #f3f3f3 !important;
+}
+.sidebar h3.widget_title:hover a {
+  color: rgba(216,50,60,.85);
+  font-weight: 450;
+  text-shadow: 1px 0px 1px rgba(63,63,63,.25);
 }
 .tagcloud a {
   background: #fff none repeat scroll 0 0;
@@ -832,7 +838,6 @@ ul#myTab.nav-tabs.scroll {
   padding-top: 2px;
   font-size: 14px !important;
   margin-bottom: 0;
-  font-weight: 700;
 }
 .sidebar {
   padding-top: 40px;
@@ -1802,7 +1807,7 @@ li.related-item.todo-list-item:hover {
   background-color: rgba(11, 72, 117, 0.05);
   cursor: pointer;
 }
-li.related-item.todo-list-item:hover a{
+li.related-item.todo-list-item:hover h3{
   color: rgba(11, 72, 117, .95);
 }
 .main_newfeed_content-col {
