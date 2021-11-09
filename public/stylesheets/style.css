@@ -1789,6 +1789,11 @@ input[type="submit"] {
 .modal-backdrop {
   display: none !important;
 }
+.modal-open .modal {
+  overflow: hidden;
+  padding-right: 0!important;
+  overflow-y: scroll!important;
+}
 /*------------- POST FORM------------- */
 .public_date-div.notice_info-item {
   float: right;
