@@ -1789,7 +1789,7 @@ input[type="submit"] {
 .modal-backdrop {
   display: none !important;
 }
-.modal-open .modal {
+.modal-open{
   overflow: hidden;
   padding-right: 0!important;
   overflow-y: scroll!important;
