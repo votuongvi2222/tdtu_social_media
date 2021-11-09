@@ -303,8 +303,25 @@ $(document).ready(function () {
 
   // noti stream
   // noti header
-  $('.noti-item .card-header').click(function(){
-    $(this).toggleClass('active');
+  $('.noti-item:not(.active)').click(function(){
+    $('.noti-item.active').removeClass('active');
+    $(this).addClass('active');
+    console.log($(this))
+  });
+  $('.noti-item.active').click(function(){
+    $(this).removeClass('active');
+    console.log('have')
+  });
+  $(document).mouseup(function(e) 
+  {
+      var container = $('.noti-list');
+
+      // if the target of the click isn't the container nor a descendant of the container
+      if (!container.is(e.target) && container.has(e.target).length === 0) 
+      {
+          $('.noti-item').removeClass('active');
+          $('.noti-content').removeClass('show');
+      }
   });
   //image map 
   $("map").imageMapResize();

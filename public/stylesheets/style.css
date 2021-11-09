@@ -1749,39 +1749,54 @@ input[type="submit"] {
 .noti-list {
   margin: 20px 0;
 }
-.noti-list .card-header{
+.noti-list .card.noti-item{
+  margin-bottom: 10px;
+  border: 1px solid rgba(0,0,0,.125)!important;
+  border-radius: .25rem!important;
+}
+.noti-list .card.noti-item .card-header{
   background-color: rgba(63,63,63,.05);
+  padding: 0!important;
 }
-.noti-list .card-header button.topic-label{
-  color: rgba(11,72,117, .7)!important;
+.noti-list .card.noti-item .card-header button.noti-label{
+  color: rgba(63,63,63, .6)!important;
   font-weight:500!important;
-  width: 98%!important;
+  width: 100%!important;
+  padding: 1.25rem!important;
 }
-.noti-list .card-header:hover button.topic-label.collapsed,
-.noti-list .card-header.active button.topic-label:not(.collapsed){
-
+.noti-list .card.noti-item.active{
+  box-shadow: 0 2px 1px 0 rgb(60 64 67 / 1%), 0 2px 6px 2px rgb(60 64 67 / 10%);
+}
+.noti-list .card.noti-item .card-header:hover button.noti-label,
+.noti-list .card.noti-item.active .card-header button.noti-label{
   color: rgba(11,72,117, 1)!important;
 }
-.noti-list .card-header:hover,
-.noti-list .card-header.active {
+.noti-list .card.noti-item .card-header:hover,
+.noti-list .card.noti-item.active .card-header {
   cursor: pointer;
-  background-color: rgba(11,72,117,.1);
+  background-color: rgba(11,72,117,.15);
 }
 .shorten-post-content,
-.topic-label{
+.noti-label{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.topic-label {
+.shorten-post-content{
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  font-size: 14px;
+}
+.noti-label {
   color: rgba(0,0,0,.8) !important;
   width: 70% !important;
 }
-.topic-label:hover {
+.noti-label:hover {
   color: rgba(216, 50, 60,1) !important;
   text-decoration: none !important;
 }
-.topic-label:focus {
+.noti-label:focus {
   box-shadow: none !important;
 }
 .card-header.post-box-header {
