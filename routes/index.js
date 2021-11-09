@@ -14,5 +14,7 @@ router.get('/add', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   res.render('howitworks', { title: 'How it works' });
 });
-
+router.get('/noti', function(req, res, next) {
+  res.render('class', { title: 'Notification' });
+});
 module.exports = router;

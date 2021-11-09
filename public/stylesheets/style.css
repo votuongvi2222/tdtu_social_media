@@ -514,6 +514,16 @@ ul#myTab.nav-tabs {
 ul#myTab.nav-tabs.scroll {
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
 }
+ul#myTab.nav-tabs li:hover a {
+  color: rgba(11,71,117,.9)!important;
+}
+ul#myTab.nav-tabs li a {
+  color: rgba(63,63,63,.6);
+}
+ul#myTab.nav-tabs li a.active {
+  color: rgba(11,71,117,1)!important;
+}
+
 .container-fluid {
   padding: 0!important;
 }
@@ -702,7 +712,7 @@ ul#myTab.nav-tabs.scroll {
   font-size: 19px;
   font-weight: 500;
   margin: 0;
-  color: #191919;
+  color: rgba(11,71,117,.9);
   text-transform: capitalize;
 }
 .crumbs {
@@ -1630,7 +1640,7 @@ input[type="submit"] {
   font-size: 13px;
   font-weight: bold;
 }
-.class-tabs a:hover {
+.noti-tabs a:hover {
   color: #999 !important;
 }
 .class-alter-icon {
@@ -1646,8 +1656,9 @@ input[type="submit"] {
   display: none;
   z-index: 1;
 }
-.class-tabs {
+.noti-tabs {
   padding-top: 20px !important;
+  min-height: 500px;
 }
 .add-people-icon {
   float: right;
@@ -1685,9 +1696,6 @@ input[type="submit"] {
 .post-detail {
   /* vertical-align: middle; */
   margin-left: 10px;
-}
-.num_of_answers {
-  padding-left: 10px;
 }
 .comment-box {
   /* background-color: #dedede; */
@@ -1738,14 +1746,35 @@ input[type="submit"] {
   /* display: flex!important; */
   text-align: left !important;
 }
-.classworks-list {
+.noti-list {
   margin: 20px 0;
 }
-.topic-label {
-  color: black !important;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.noti-list .card-header{
+  background-color: rgba(63,63,63,.05);
+}
+.noti-list .card-header button.topic-label{
+  color: rgba(11,72,117, .7)!important;
+  font-weight:500!important;
+  width: 98%!important;
+}
+.noti-list .card-header:hover button.topic-label.collapsed,
+.noti-list .card-header.active button.topic-label:not(.collapsed){
+
+  color: rgba(11,72,117, 1)!important;
+}
+.noti-list .card-header:hover,
+.noti-list .card-header.active {
+  cursor: pointer;
+  background-color: rgba(11,72,117,.1);
+}
+.shorten-post-content,
+.topic-label{
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topic-label {
+  color: rgba(0,0,0,.8) !important;
   width: 70% !important;
 }
 .topic-label:hover {

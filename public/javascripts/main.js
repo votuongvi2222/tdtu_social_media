@@ -300,6 +300,12 @@ $(document).ready(function () {
     $('#post_editor-btn').hide();
     $('#post_content_editor-textarea').focus();
   })
+
+  // noti stream
+  // noti header
+  $('.noti-item .card-header').click(function(){
+    $(this).toggleClass('active');
+  });
   //image map 
   $("map").imageMapResize();
 
