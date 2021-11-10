@@ -3,6 +3,8 @@
 
 <head>
   <%- include("./partials/head") %>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="442702306670-ek3o50ifmn546sb635ha420mffgghijg.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -34,6 +36,7 @@
                     </div>
                     <p class="text-center">Not yet a member? <a href="index.php">Sign up</a></p>
                     <p class="text-center"><a href="login.php?rs=1">Forgot password? </a></p>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </form>
             </div>
         </div>

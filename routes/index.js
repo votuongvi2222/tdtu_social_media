@@ -17,4 +17,8 @@ router.get('/about', function(req, res, next) {
 router.get('/noti', function(req, res, next) {
   res.render('class', { title: 'Notification' });
 });
+
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'Login'});
+});
 module.exports = router;
