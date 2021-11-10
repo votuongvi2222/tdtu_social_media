@@ -524,7 +524,7 @@ ul#myTab.nav-tabs li a.active {
   color: rgba(11,71,117,1)!important;
 }
 
-.container-fluid {
+body:not(.form-page) .container-fluid {
   padding: 0!important;
 }
 .with-sidebar-container ul,
@@ -907,7 +907,6 @@ body > img {
   position: fixed;
   top: 0;
   left: 0;
-  height: auto;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -916,6 +915,12 @@ body > img {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+}
+body > img {
+  height: auto;
+}
+body.form-page > img {
+  height: 100%;
 }
 .form-page .form-div,
 .form-div {
@@ -2559,6 +2564,11 @@ div.zabuto_calendar div.legend span.badge {
   padding-right: 5px;
   padding-top: 2px;
   padding-bottom: 3px;
+}
+
+/* google login */
+.g-signin2 {
+  margin-bottom: 20px;
 }
 @media (max-width: 768px) {
   .hidden-xs {
