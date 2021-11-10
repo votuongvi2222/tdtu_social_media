@@ -14,7 +14,7 @@ var app = express();
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tdtusocialmedia');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
