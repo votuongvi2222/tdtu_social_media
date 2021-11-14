@@ -897,9 +897,9 @@ body:not(.form-page) .container-fluid {
 }
 body.form-page,
 body {
-  background-color: white;
   position: absolute;
   width: 100%;
+  background-color: rgba(11,72,117,0.05);
   height: 120vh;
 }
 body.form-page > img,
@@ -925,6 +925,7 @@ body.form-page > img {
 .form-page .form-div,
 .form-div {
   z-index: 999999999999999;
+  padding: 10px 30px;
   border: none;
   border-radius: 5px;
   font-size: 12px;
@@ -933,6 +934,7 @@ body.form-page > img {
   color: black;
   background-color: white;
   opacity: 1;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
 }
 
 .form-page .form-title {
@@ -958,8 +960,11 @@ body.form-page > img {
   font-weight: bolder;
 }
 .form-page .btn {
-  background-color: black !important;
+  background-color: rgba(11,72,117,.85) !important;
   border: none !important;
+}
+.form-page .btn:hover{
+  background-color: rgba(11,72,117,1) !important;
 }
 .form-page .form-control:focus {
   box-shadow: none;
@@ -2656,6 +2661,11 @@ div.zabuto_calendar div.legend span.badge {
   .infocenter-qform-desc,
   .question_poll_item {
     margin-left: 0;
+  }
+  .form-page .form-div{
+    margin-left:8px;
+    margin-right: 8px;
+    padding: 10px 30px;
   }
   .form-style .form-submit input.submit {
     width: 100%;
