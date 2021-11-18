@@ -18,6 +18,7 @@ router.get('/google/callback',
     { failureRedirect: '/login' }), 
     (req, res) => {
         // console.log('flash:-----------' + req._student.avatar)
+        req.session.roleId = '1'
         req.session.user = req._student
         res.redirect('/')
     }

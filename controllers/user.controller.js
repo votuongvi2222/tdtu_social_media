@@ -14,6 +14,7 @@ var loadHomePage = (req, res) => {
     if(!req.session.user)
         return res.redirect('/login');
     var user = req.session.user
+    var roleId = req.session.roleId
     if(roleId == '1')
         avatar = user.avatar
     else
