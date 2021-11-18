@@ -11,8 +11,9 @@ var loadLoginPage = (req, res) => {
 }
 var loadHomePage = (req, res) => {
     // console.log(req.flash('avatar')[0])
-    var roleId = req.flash('role')[0].id
-    var user = req.flash('user')[0].info
+    if(!req.session.user)
+        return res.redirect('/login');
+    var user = req.session.user
     if(roleId == '1')
         avatar = user.avatar
     else
