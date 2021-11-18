@@ -9,7 +9,7 @@ module.exports = function(passport) {
     passport.use(new GoogleStrategy({
         clientID: '442702306670-ek3o50ifmn546sb635ha420mffgghijg.apps.googleusercontent.com' || process.env.GOOGLE_CLIENT_ID,
         clientSecret: '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' || process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/auth/google/callback",
+        callbackURL: "https://tdtusocialmedia.herokuapp.com/auth/google/callback",
         passReqToCallback: true
       },
     (req, accessToken, refreshToken, profile, done) => {
