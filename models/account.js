@@ -2,20 +2,18 @@ var mongoose = require('mongoose'),
     bcrypt = require('bcrypt');
 
 var accountSchema = mongoose.Schema({
-    username: {
+    username: { // displayname
         type: String,
         unique: true,
         required: true,
         trim: true
     },
-    nickname: String,
     hashedPassword: {
         type: String,
         required: true,
     },
-    avatar: String,
     roleId: {
-        type: String,
+        type: Number,
         required: true,
     },
 }, { timestamps: true });

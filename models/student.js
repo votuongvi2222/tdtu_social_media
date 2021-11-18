@@ -1,18 +1,43 @@
 var mongoose = require('mongoose');
 
 var studentSchema = mongoose.Schema({
-    fullname: String,
-    studentId: String,
-    studentEmail: String,
+    googleId: { 
+        type: String,
+        required: true
+    },// gg id
+    fullname: {
+        type: String,
+        required: true
+    }, // gg displayname
+    studentId: {
+        type: String,
+        unique: true,
+        required: true,
+    },
+    studentEmail: {
+        type: String,
+        unique: true,
+        required: true,
+    }, // gg email
     classId: String,
-    facultyId: String,
-    birthDate: Date,
-    accountId: String,
-    gender: String,
+    facultyCode: { 
+        type: String,
+        required: true
+    }, // department code
+    birthday: Date, // gg birthdate
+    accountId: {
+        unique: true,
+        type: String
+    },
+    gender: String, // gg gender
+    avatar: String, // gg coverPhoto
     schoolYear: Number, // the year start
-    programId: String, // high quaity or standar
-    phoneNumber: Number,
-    address: String,
+    program: String, // high quaity or standar
+    phoneNumber: {
+        unique: true,
+        type: Number
+    },
+    address: String, // gg places lived
     hometown: String,
     relatives: [{
         name: String,

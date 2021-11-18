@@ -4,7 +4,7 @@ var commentSchema = mongoose.Schema({
     accountId: String,
     content: String,
     subCommentIds: [String], // subcomment is also a comment
-    likeId: [String], 
+    likers: [String], 
 }, { timestamps: true });
 var Comment = mongoose.model('Comment', commentSchema);
 module.exports = Comment;

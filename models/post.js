@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var postSchema = mongoose.Schema({
     accountId: String, // who posts?
-    content: String,
+    caption: String,
+    likers: [String],  // acc id
     images: [String], // image path
     files: [String], // file path
     links: [String], // link url
