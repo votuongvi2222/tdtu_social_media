@@ -7,8 +7,8 @@ var Account = require('../models/account')
 
 module.exports = function(passport) {
     passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientID: '442702306670-ek3o50ifmn546sb635ha420mffgghijg.apps.googleusercontent.com' || process.env.GOOGLE_CLIENT_ID,
+        clientSecret: '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' || process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "/auth/google/callback",
         passReqToCallback: true
       },
