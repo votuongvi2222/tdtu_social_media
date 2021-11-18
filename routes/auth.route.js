@@ -1,4 +1,4 @@
-const flash = require('connect-flash/lib/flash');
+// const flash = require('connect-flash');
 var express = require('express')
 var passport = require('passport')
 var router = express.Router()
