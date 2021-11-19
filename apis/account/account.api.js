@@ -1,27 +1,23 @@
 var Account = require('../../models/account'),
     Role = require('../../models/role'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    moment = require('moment');
 
-    var getAccounts = (req, res) => {
-        Account.find((error, accounts) => {
-            if(error) return res.send(500, 'Error occurred: Database error!');
-            return res.json(accounts.map((account) => {
-                // console.log(account.roleId)
-                // Role.findOne({roleCode: account.roleId}, (error, role) => {
-                //     if(error) return res.send(500, 'Error occurred: Database error!');
-                //     if(!role) return res.send(404, 'Role id is not found!');
-                //     console.log(role.roleCode)
-                return {
-                    id: account._id,
-                    username: account.username,
-                    createdTime: account.createAt,
-                    updatedTime: account.updatedAt, 
-                    role: account.roleId
-                }
-                // })
-            }))
-        })
-    }
+var getAccounts = (req, res) => {
+    Account.find((error, accounts) => {
+        if(error) return res.send(500, 'Error occurred: Database error!');
+        return res.json(accounts.map((account) => {
+            return {
+                id: account._id,
+                username: account.username,
+                createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+                updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
+                role: account.roleId
+            }
+            // })
+        }))
+    })
+}
 
 var getAccountById = (req, res) => {
     Account.findById(req.params.id, (error, account) => {
@@ -30,8 +26,8 @@ var getAccountById = (req, res) => {
         return res.json({
             id: account._id,
             username: account.username,
-            createdTime: account.createAt,
-            updatedTime: account.updatedAt, 
+            createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+            updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
             role: account.roleId
         })
     })
@@ -51,8 +47,8 @@ var putAccountById = (req, res) => {
             return res.json({
                 id: account._id,
                 username: account.username,
-                createdTime: account.createdAt,
-                updatedTime: account.updatedAt, 
+                createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+                updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
             })
         })
@@ -70,8 +66,8 @@ var postAccount = (req, res) => {
         return res.json({
             id: account._id,
             username: account.username,
-            createdTime: account.createdAt,
-            updatedTime: account.updatedAt, 
+            createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+            updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
             role: account.roleId
         })
     })
@@ -86,8 +82,8 @@ var deleteAccountById = (req, res) => {
             return res.json({
                 id: account._id,
                 username: account.username,
-                createdTime: account.createdAt,
-                updatedTime: account.updatedAt, 
+                createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+                updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
             })
         })

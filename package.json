@@ -20,6 +20,7 @@
     "flash": "^1.1.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "mongoose": "^6.0.12",
     "morgan": "~1.9.1",
     "passport": "^0.5.0",

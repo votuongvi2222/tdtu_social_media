@@ -34,13 +34,13 @@ module.exports = function(passport) {
             Student.findOne({ googleId: profile.id }, (error, student) => {
                 // 2.1 ---- ERR
                 if(error){
-                    return res.send(500, 'Error occurred: Database error!');
+                    return done(null, null);
                 // 2.2 ---- FOUND: user has already sign in before by google
                 } else if (student){
                     // Check if student have an account or not by accountId
                     Account.findById(student.accountId, (err, account) => {
                         // 2.2.1 ---- ERR
-                        if(err) return res.send(500, 'Error occurred: Database error!');
+                        if(err) return done(null, null);
                         // 2.2.2 ---- FOUND
                         else if(account){
                             req._account = account
@@ -52,7 +52,7 @@ module.exports = function(passport) {
                         } else {
                             req.flash('error', 'Your account is not found')
                             // ==== Return failed signal
-                            return done(null, null)
+                            return done(null, null);
                         }
                         
                     })
@@ -68,7 +68,7 @@ module.exports = function(passport) {
                         if(err) {
                             console.log('3------------------')
                             console.log(err)
-                            return res.send(500, 'Error occurred: Database error!');
+                            return done(null, null);
                         }
                         new Student({
                             googleId: profile.id,// gg id
@@ -85,7 +85,7 @@ module.exports = function(passport) {
                             if(err) {
                                 console.log('4----------------')
                                 console.log(err)
-                                return res.send(500, 'Error occurred: Database error!');
+                                return done(null, null);
                             }
                             else{
                                 req._student = student

@@ -8,9 +8,10 @@ var flash = require('connect-flash');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var passport = require('passport')
-var indexRouter = require('./routes/user.route');
-var authRouter = require('./routes/auth.route')
-var accountApiRouter = require('./apis/account/account.api.route');
+var indexRouter = require('./routes/user.route'),
+    authRouter = require('./routes/auth.route'),
+    studentApiRouter = require('./apis/student/student.api.route'),
+    accountApiRouter = require('./apis/account/account.api.route');
 
 var app = express();
 require('./config/passport')(passport)
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/api/v1', accountApiRouter);
+app.use('/api/v1', studentApiRouter);
 
 
 // catch 404 and forward to error handler

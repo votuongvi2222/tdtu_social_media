@@ -31,11 +31,17 @@ var studentSchema = mongoose.Schema({
     },
     gender: String, // gg gender
     avatar: String, // gg coverPhoto
-    schoolYear: Number, // the year start
-    program: String, // high quaity or standar
+    schoolYear: {
+        type: Number,
+        required: true
+    }, // the year start
+    program: {
+        type: String,
+        required: true
+    }, // high quaity or standar
     phoneNumber: {
         unique: true,
-        type: Number
+        type: String
     },
     address: String, // gg places lived
     hometown: String,

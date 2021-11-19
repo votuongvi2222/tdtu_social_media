@@ -1,130 +1,192 @@
 var Student = require('../../models/student'),
     Role = require('../../models/role'),
+    Department = require('../../models/department'),
+    Account = require('../../models/account'),
     bcrypt = require('bcrypt');
 
-var getStudents = (req, res) => {
-    Student.find((error, students) => {
-        if(error) return res.send(500, 'Error occurred: Database error!');
-        return res.json(students.map((student) => {
-            Role.findById(student.roleId, (error, role) => {
-                if(error) return res.send(500, 'Error occurred: Database error!');
-                if(!role) return res.send(404, 'Role id is not found!');
-                return res.json({
+var getStudents =  async (req, res) => {
+    try {
+        const students = await Student.find({});
+        const studentsInfo = await Promise.all(
+            students.map(async (student) => {
+                const faculty = await Department.findOne({departmentCode: student.facultyCode})
+                const account = await Account.findById(student.accountId);
+
+                return {
                     id: student._id,
-                    username: student.username,
-                    createdTime: student.createAt,
-                    updatedTime: student.updatedAt, 
-                    role: {
-                        id: role._id,
-                        name: role.name
+                    googleId: student.googleId,// gg id
+                    fullname: student.fullname, // gg displayname
+                    studentId: student.studentId,
+                    studentEmail: student.studentEmail, // gg email
+                    classId: student.classId || '',
+                    faculty: faculty.name, // department code
+                    birthday: student.birthday || '', // gg birthdate
+                    account: {
+                        id: account._id,
+                        username: account.username
                     },
-                    avatar: student.avatar
-                })
-            })
-        }))
-    })
+                    gender: student.gender || '', // gg gender
+                    avatar: student.avatar || '', // gg coverPhoto
+                    schoolYear: student.schoolYear, // the year start
+                    program: student.program, // high quaity or standar
+                    phoneNumber: student.phoneNumber || '',
+                    address: student.address || '', // gg places lived
+                    hometown: student.hometown || '',
+                    relatives: student.relatives || []
+                }
+            }
+        ))
+        return res.json(studentsInfo);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
+var getStudentById = async (req, res) => {
+    try {
+        const student = await Student.findById(req.params.id);
+        const faculty = await Department.findOne({departmentCode: student.facultyCode})
+        const account = await Account.findById(student.accountId);
+        return res.json({
+            id: student._id,
+            googleId: student.googleId,// gg id
+            fullname: student.fullname, // gg displayname
+            studentId: student.studentId,
+            studentEmail: student.studentEmail, // gg email
+            classId: student.classId || '',
+            faculty: faculty.name, // department code
+            birthday: student.birthday || '', // gg birthdate
+            account: {
+                id: account._id,
+                username: account.username
+            },
+            gender: student.gender || '', // gg gender
+            avatar: student.avatar || '', // gg coverPhoto
+            schoolYear: student.schoolYear, // the year start
+            program: student.program, // high quaity or standar
+            phoneNumber: student.phoneNumber || '',
+            address: student.address || '', // gg places lived
+            hometown: student.hometown || '',
+            relatives: student.relatives || []
+        })
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 }
 
-var getStudentById = (req, res) => {
-    Student.findById(req.params.id, (error, student) => {
-        if(error) return res.send(500, 'Error occurred: Database error!');
-        if(!student) return res.send(404, 'Student id is not found!');
-        Role.findById(student.roleId, (error, role) => {
-            if(error) return res.send(500, 'Error occurred: Database error!');
-            if(!role) return res.send(404, 'Role id is not found!');
-            return res.json({
-                id: student._id,
-                username: student.username,
-                createdTime: student.createAt,
-                updatedTime: student.updatedAt, 
-                role: {
-                    id: role._id,
-                    name: role.name
-                },
-                avatar: student.avatar
-            })
+var putStudentById = async (req, res) => {
+    try {
+        const student = await Student.findById(req.params.id);
+        const faculty = await Department.findOne({departmentCode: req.body.facultyCode});
+        const account = await Account.findById(req.body.accountId);
+        student.fullname = req.body.fullname || '';
+        student.studentId = req.body.studentId || '';
+        student.studentEmail = req.body.studentEmail || '';
+        student.birthday = req.body.birthday || '';
+        student.classId = req.body.classId || '';
+        student.accountId = account._id;
+        student.gender = req.body.gender || '';
+        student.avatar = req.body.avatar || '';
+        student.schoolYear = req.body.schoolYear || '';
+        student.program = req.body.program || '';
+        student.phoneNumber = req.body.phoneNumber || '';
+        student.address = req.body.address || '';
+        student.hometown = req.body.hometown || '';
+        student.relatives = req.body.relatives || [];
+        student.facultyCode = faculty.departmentCode;
+        return res.json({
+            id: student._id,
+            googleId: student.googleId,// gg id
+            fullname: student.fullname, // gg displayname
+            studentId: student.studentId,
+            studentEmail: student.studentEmail, // gg email
+            class: student.classId,
+            faculty: faculty.name, // department code
+            birthday: student.birthday, // gg birthdate
+            account: {
+                id: account._id,
+                username: account.username
+            },
+            gender: student.gender, // gg gender
+            avatar: student.avatar, // gg coverPhoto
+            schoolYear: student.schoolYear, // the year start
+            program: student.program, // high quaity or standar
+            phoneNumber: student.phoneNumber,
+            address: student.address, // gg places lived
+            hometown: student.hometown,
+            relatives: student.relatives,
+            createdTime: moment(student.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+            updatedTime: moment(student.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
         })
-    })
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 }
 
-var putStudentById = (req, res) => {
-    Student.findById(req.params.id, (error, student) => {
-        if(error) return res.send(500, 'Error occurred: Database error!');
-        if(!student) return res.send(404, 'Student id is not found!');
-        Role.findById(req.body.roleId, (error, role) => {
-            if(error) return res.send(500, 'Error occurred: Database error!');
-            if(!role) return res.send(404, 'Role id is not found!');
-            student.username = req.body.username;
-            student.hashedPassword = bcrypt.hashSync(req.body.password, 10);
-            student.roleId = req.body.roleId;
-            student.avatar = req.body.avatar;
-            student.save((error, student)  => {
-                if(error) return res.send(500, 'Error occurred: Database error!');
-                return res.json({
-                    id: student._id,
-                    username: student.username,
-                    createdTime: student.createAt,
-                    updatedTime: student.updatedAt, 
-                    role: {
-                        id: role._id,
-                        name: role.name
-                    },
-                    avatar: student.avatar
-                })
-            })
+var postStudent = async (req, res) => {
+    try {
+        const faculty = await Department.findOne({departmentCode: req.body.facultyCode});
+        const account = await Account.findById(req.body.accountId);
+        const student = new Student({
+            googleId: req.body.googleId,// gg id
+            fullname: req.body.fullname, // gg displayname
+            studentId: req.body.studentId,
+            studentEmail: req.body.studentEmail, // gg email
+            classId: req.body.classId,
+            facultyCode: faculty.departmentCode, // department code
+            birthday: req.body.birthday, // gg birthdate
+            accountId: account._id,
+            gender: req.body.gender, // gg gender
+            avatar: req.body.avatar, // gg coverPhoto
+            schoolYear: req.body.schoolYear, // the year start
+            program: req.body.program, // high quaity or standar
+            phoneNumber: req.body.phoneNumber,
+            address: req.body.address, // gg places lived
+            hometown: req.body.hometown,
+            relatives: req.body.relatives,
+        });
+        await student.save();
+        return res.json({
+            id: student._id,
+            googleId: student.googleId,// gg id
+            fullname: student.fullname, // gg displayname
+            studentId: student.studentId,
+            studentEmail: student.studentEmail, // gg email
+            class: student.classId,
+            faculty: faculty.name, // department code
+            birthday: student.birthday, // gg birthdate
+            account: {
+                id: account._id,
+                username: account.username
+            },
+            gender: student.gender, // gg gender
+            avatar: student.avatar, // gg coverPhoto
+            schoolYear: student.schoolYear, // the year start
+            program: student.program, // high quaity or standar
+            phoneNumber: student.phoneNumber,
+            address: student.address, // gg places lived
+            hometown: student.hometown,
+            relatives: student.relatives,
+            createdTime: moment(student.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+            updatedTime: moment(student.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
         })
-    })
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 }
 
-var postStudent = (req, res) => {
-    Role.findById(req.body.roleId, (error, role) => {
-        if(error) return res.send(500, 'Error occurred: Database error!');
-        if(!role) return res.send(404, 'Role id is not found!');
-        new Student({
-            username: req.body.username,
-            hashedPassword: bcrypt.hashSync(req.body.password, 10),
-            roleId: req.body.roleId,
-            avatar: req.body.avatar
-        }).save((error, student) => {
-            if(error) return res.send(500, 'Error occurred: Database error!');
-            return res.json({
-                id: student._id,
-                username: student.username,
-                createdTime: student.createAt,
-                updatedTime: student.updatedAt, 
-                role: {
-                    id: role._id,
-                    name: role.name
-                },
-                avatar: student.avatar
-            })
-        })
-    })
-}
-
-var deleteStudentById = (req, res) => {
-    Student.findById(req.params.id, (error, student) => {
-        if(error) return res.send(500, 'Error occurred: Database error!');
-        if(!student) return res.send(404, 'Student id is not found!');
-        Role.findById(req.body.roleId, (error, role) => {
-            if(error) return res.send(500, 'Error occurred: Database error!');
-            if(!role) return res.send(404, 'Role id is not found!');
-            student.delete((error, student)  => {
-                if(error) return res.send(500, 'Error occurred: Database error!');
-                return res.json({
-                    id: student._id,
-                    username: student.username,
-                    createdTime: student.createAt,
-                    updatedTime: student.updatedAt, 
-                    role: {
-                        id: role._id,
-                        name: role.name
-                    },
-                    avatar: student.avatar
-                })
-            })
-        })
-    })
+var deleteStudentById = async (req, res) => {
+    try {
+        const student = await Student.findById(req.params.id);
+        await student.delete()
+        return res.json('Deleted!')
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 }
 
 module.exports = {

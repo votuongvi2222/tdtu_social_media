@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var accountApis = require('./account.api')
+var studentApis = require('./student.api')
 /* GET home page. */
-router.get('/accounts', accountApis.getAccounts);
-router.get('/account/:id', accountApis.getAccountById);
-router.post('/account', accountApis.postAccount);
-router.put('/account/:id', accountApis.putAccountById);
-router.delete('/account/:id', accountApis.deleteAccountById);
+router.get('/students', studentApis.getStudents);
+router.get('/student/:id', studentApis.getStudentById);
+router.post('/student', studentApis.postStudent);
+router.put('/student/:id', studentApis.putStudentById);
+router.delete('/student/:id', studentApis.deleteStudentById);
 
 module.exports = router;
