@@ -172,7 +172,11 @@
                                                 <div class="post_editor-btn" id="post_editor-btn" role="button">
                                                     <div class="avatar-container">
                                                         <div class="img-box">
+                                                            <% if(roleId == '1' || roleId == 1) { %>
                                                             <img src="<%= avatar%>" alt="user_avatar">
+                                                            <% } else { %>
+                                                            <img src="images/avatar.png" alt="default-avatar">
+                                                            <% } %>
                                                         </div>
                                                     </div>
                                                     <div class="post_instruction-btn">Write something to share...</div>

@@ -15,13 +15,13 @@ var loadHomePage = (req, res) => {
         return res.redirect('/login');
     var user = req.session.user
     var roleId = req.session.roleId
-    if(roleId == '1')
-        avatar = user.avatar
-    else
-        avatar = "images/avatar.png"
+    // if(roleId == '1')
+    //     avatar = user.avatar
+    // else
+    //     avatar = "images/avatar.png"
 
     // console.log(user.link+'-==================')
-    res.render('home', { title: 'Home', user: user, avatar: avatar, fullname: user.fullname });
+    res.render('home', { title: 'Home', user: user, roleId: roleId});
 }
 var loadPostFormPage = (req, res) => {
     res.render('post-form', { title: 'Add Noti' });
