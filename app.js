@@ -25,7 +25,7 @@ app.use(session({
   secret: 'tdtusocialmedia',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
+  cookie: { maxAge: 30*60*1000 }
 }))
 app.use(flash());
 
