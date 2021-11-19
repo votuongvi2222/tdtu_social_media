@@ -11,13 +11,16 @@ module.exports = function(passport) {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: process.env.CALLBACK_URL || '/auth/google/callback',
         passReqToCallback: true
-      },
-    (req, accessToken, refreshToken, profile, done) => {
+    }, (req, accessToken, refreshToken, profile, done) => {
         // console.log('profile: '+profile)
         // console.log('accesstoken: '+accessToken)
+
+        // ==== Check domain if it tdtu mail or not
+        // 1 ---- MATCHED
         if(profile._json.domain == 'student.tdtu.edu.vn'){
             var studentId = profile.emails[0].value.replace('@student.tdtu.edu.vn', '')
             // console.log(studentId)
+            // ==== Modify program for student
             var programCode = studentId.substring(3,4),
                 program = ''
             if(programCode == '0'){
@@ -27,19 +30,36 @@ module.exports = function(passport) {
             } else {
                 program = 'international'
             }
+            // ==== Find student by googleId
             Student.findOne({ googleId: profile.id }, (error, student) => {
-                if(student){
+                // 2.1 ---- ERR
+                if(error){
+                    return res.send(500, 'Error occurred: Database error!');
+                // 2.2 ---- FOUND: user has already sign in before by google
+                } else if (student){
+                    // Check if student have an account or not by accountId
                     Account.findById(student.accountId, (err, account) => {
+                        // 2.2.1 ---- ERR
                         if(err) return res.send(500, 'Error occurred: Database error!');
-                        // console.log('6----------------------------'+account)
-                        req._account = account
-                        req._student = student
-                        console.log('1---------------' + req._student)
-                        return done(null, student);
+                        // 2.2.2 ---- FOUND
+                        else if(account){
+                            req._account = account
+                            req._student = student
+                            console.log('1---------------' + req._student)
+                            // ==== Return success signal
+                            return done(null, student);
+                        // 2.2.3 ---- NOT FOUND
+                        } else {
+                            req.flash('error', 'Your account is not found')
+                            // ==== Return failed signal
+                            return done(null, null)
+                        }
+                        
                     })
-                    
+                // 2.3 ---- NOT FOUND: user hasn't signed in before
                 }else{
-                    console.log('2----------------------------')
+                    console.log('2---------------------------- Not found')
+                    // ==== Create new account by email info
                     new Account({
                         username: studentId,
                         hashedPassword: bcrypt.hashSync(studentId, 10),
@@ -71,21 +91,21 @@ module.exports = function(passport) {
                                 req._student = student
                                 req._account = account
                                 console.log('5--------------------')
+                                // ==== Return success signal
                                 return done(null, student);
                             }
                         })
                     })
                 }
             });
-            
+        // 2 ---- NOT MATCHED
         } else {
             req.flash('error', 'Use student email please!')
+            // ==== Return failed signal
             return done(null, null)
         }
         
-        // console.log(profile)
-      }
-    ));
+    }));
     passport.serializeUser((student, done) => {
         done(null, student.id);
     });

@@ -21,6 +21,7 @@ router.get('/google/callback',
         req.session.username = req._account.username
         req.session.roleId = req._account.roleId
         req.session.user = req._student
+        req.session.isAuth = true;
         res.redirect('/')
     }
 );

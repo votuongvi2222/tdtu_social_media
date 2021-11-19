@@ -7,11 +7,29 @@ var Department = require('../models/department'),
     Role = require('../models/role'),
     userControllers = require('../controllers/user.controller'),
     {ensureAuth, ensureGuest} = require('../middlewares/checkAccountAuth.middleware')
-/* GET home page. */
+
+//  @desc Load home page
+//  @route GET /
 router.get('/', ensureAuth, userControllers.loadHomePage);
+
+//  @desc Load login page
+//  @route GET /login
 router.get('/login', ensureGuest, userControllers.loadLoginPage);
+
+//  @desc Load login page
+//  @route GET /login
+router.post('/login', userControllers.login);
+
+//  @desc Load form to add new notice
+//  @route GET /add
 router.get('/add', ensureAuth, userControllers.loadPostFormPage);
+
+//  @desc Load instruction page
+//  @route GET /about
 router.get('/about', ensureAuth, userControllers.loadAboutPage);
+
+//  @desc Load notification page (all noti)
+//  @route GET /noti
 router.get('/noti', ensureAuth, userControllers.loadNotiPagePerDep);
 var departments = {
   '0': 'Khoa Ngoại ngữ',
@@ -62,9 +80,10 @@ router.get('/init', (req, res) => {
   .forEach(function eachKey(code) { 
     console.log('code: ' + code)
     console.log('name: ' + departments[code])
+    var username = code+randomstring.generate(6)
     departmentAccount = new Account({
-      username: code+randomstring.generate(6),
-      hashedPassword: bcrypt.hashSync(code+randomstring.generate(6), 10),
+      username: username,
+      hashedPassword: bcrypt.hashSync(username, 10),
       roleId: 2
     })
     departmentAccount.save((err, acc) => {
