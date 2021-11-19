@@ -10,9 +10,9 @@ var Department = require('../models/department'),
 /* GET home page. */
 router.get('/', ensureAuth, userControllers.loadHomePage);
 router.get('/login', ensureGuest, userControllers.loadLoginPage);
-router.get('/add', userControllers.loadPostFormPage);
-router.get('/about', userControllers.loadAboutPage);
-router.get('/noti', userControllers.loadNotiPagePerDep);
+router.get('/add', ensureAuth, userControllers.loadPostFormPage);
+router.get('/about', ensureAuth, userControllers.loadAboutPage);
+router.get('/noti', ensureAuth, userControllers.loadNotiPagePerDep);
 var departments = {
   '0': 'Khoa Ngoại ngữ',
   '1': 'Khoa Mỹ thuật công nghiệp',
