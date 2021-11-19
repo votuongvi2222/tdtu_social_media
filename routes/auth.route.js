@@ -17,11 +17,22 @@ router.get('/google/callback',
     passport.authenticate('google', 
     { failureRedirect: '/login' }), 
     (req, res) => {
-        // console.log('flash:-----------' + req._student.avatar)
-        req.session.roleId = '1'
+        // console.log('flash:-----------' + req._account)
+        req.session.username = req._account.username
+        req.session.roleId = req._account.roleId
         req.session.user = req._student
         res.redirect('/')
     }
 );
+
+// @desc GG logout
+// @route GET /logout
+router.get('/logout', (req, res) => {
+    req.logout()
+    req.session.destroy((err)=>{
+        if(err) return next(err)
+        return res.redirect('/login')
+    })
+})
 
 module.exports = router

@@ -43,7 +43,10 @@ app.use(cookieParser());
 // static
 app.use(express.static(path.join(__dirname, 'public')));
 
-// route middleware
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+});
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/api/v1', accountApiRouter);

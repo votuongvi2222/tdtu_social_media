@@ -7,9 +7,9 @@ var Account = require('../models/account')
 
 module.exports = function(passport) {
     passport.use(new GoogleStrategy({
-        clientID: '442702306670-ek3o50ifmn546sb635ha420mffgghijg.apps.googleusercontent.com' || process.env.GOOGLE_CLIENT_ID,
-        clientSecret: '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' || process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://tdtusocialmedia.herokuapp.com/auth/google/callback",
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.CALLBACK_URL || '/auth/google/callback',
         passReqToCallback: true
       },
     (req, accessToken, refreshToken, profile, done) => {
@@ -29,9 +29,15 @@ module.exports = function(passport) {
             }
             Student.findOne({ googleId: profile.id }, (error, student) => {
                 if(student){
-                    req._student = student
-                    console.log('1---------------' + req._student)
-                    return done(null, student);
+                    Account.findById(student.accountId, (err, account) => {
+                        if(err) return res.send(500, 'Error occurred: Database error!');
+                        // console.log('6----------------------------'+account)
+                        req._account = account
+                        req._student = student
+                        console.log('1---------------' + req._student)
+                        return done(null, student);
+                    })
+                    
                 }else{
                     console.log('2----------------------------')
                     new Account({
@@ -63,6 +69,7 @@ module.exports = function(passport) {
                             }
                             else{
                                 req._student = student
+                                req._account = account
                                 console.log('5--------------------')
                                 return done(null, student);
                             }

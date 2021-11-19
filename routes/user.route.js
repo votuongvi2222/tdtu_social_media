@@ -5,10 +5,11 @@ var bcrypt = require('bcrypt'),
 var Department = require('../models/department'),
     Account = require('../models/account'),
     Role = require('../models/role'),
-    userControllers = require('../controllers/user.controller')
+    userControllers = require('../controllers/user.controller'),
+    {ensureAuth, ensureGuest} = require('../middlewares/checkAccountAuth.middleware')
 /* GET home page. */
-router.get('/', userControllers.loadHomePage);
-router.get('/login', userControllers.loadLoginPage);
+router.get('/', ensureAuth, userControllers.loadHomePage);
+router.get('/login', ensureGuest, userControllers.loadLoginPage);
 router.get('/add', userControllers.loadPostFormPage);
 router.get('/about', userControllers.loadAboutPage);
 router.get('/noti', userControllers.loadNotiPagePerDep);
