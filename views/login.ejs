@@ -13,9 +13,11 @@
             <div class="form-div col-md-4 offset-md-4">
                 <form action="" id="login-form">
                     <div class="form-title"><h3 class="text-center">Login</h3></div>
+                    <% if(message.length > 0){ %>
                     <div class="alert alert-danger" role="alert">
-                        Test
+                        <%= message %>
                     </div>
+                    <% } %>
                     <div class="form-group">
                         <label for="username">Email or Username</label><br>
                         <input type="text" name="username" placeholder="Enter your email or username" class="form-input" required>

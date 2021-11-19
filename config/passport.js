@@ -79,6 +79,7 @@ module.exports = function(passport) {
             });
             
         } else {
+            req.flash('error', 'Use student email please!')
             return done(null, null)
         }
         

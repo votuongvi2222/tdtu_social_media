@@ -7,12 +7,11 @@ var Department = require('../models/department'),
     Role = require('../models/role')
 
 var loadLoginPage = (req, res) => {
-    res.render('login', {title: 'Login'});
+    var message = req.flash('error') || '';
+    res.render('login', {title: 'Login', message: message});
 }
 var loadHomePage = (req, res) => {
     // console.log(req.flash('avatar')[0])
-    if(!req.session.user)
-        return res.redirect('/login');
     var user = req.session.user || ''
     var username = req.session.username
     var roleId = req.session.roleId
