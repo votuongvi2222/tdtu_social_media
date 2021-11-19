@@ -43,7 +43,15 @@ var login = (req, res) => {
                         if(err) return res.send(500, 'Error occurred: Database error!');
                         //  2.2.1.2 ---- FOUND
                         else if (student) {
+                            console.log('IS STUDENT')
+                            // ==== Assign session for authentication
                             req.session.user = student
+                            req.session.roleId = account.roleId
+                            req.session.username = account.username
+                            req.session.isAuth = true;
+                            console.log('OK')
+                            // ==== GET /
+                            return res.redirect('/');
                         //  2.2.1.3 ---- NOT FOUND
                         } else {
                             req.flash('error', 'You are not a student!')
@@ -61,7 +69,14 @@ var login = (req, res) => {
                         if(err) return res.send(500, 'Error occurred: Database error!');
                         //  2.2.2.2 ---- FOUND
                         else if (department) {
+                            // ==== Assign session for authentication
                             req.session.user = department
+                            req.session.roleId = account.roleId
+                            req.session.username = account.username
+                            req.session.isAuth = true;
+                            console.log('OK')
+                            // ==== GET /
+                            return res.redirect('/');
                         //  2.2.2.3 ---- NOT FOUND
                         } else {
                             req.flash('error', 'You are not a staff!')
@@ -73,13 +88,6 @@ var login = (req, res) => {
                 } else {
                     req.session.user = account
                 }
-                // ==== Assign session for authentication
-                req.session.roleId = account.roleId
-                req.session.username = account.username
-                req.session.isAuth = true;
-                console.log('OK')
-                // ==== GET /
-                return res.redirect('/');
             }
         // 3 ---- NOT FOUND
         } else {
@@ -92,7 +100,7 @@ var login = (req, res) => {
 var loadHomePage = (req, res) => {
     // console.log(req.flash('avatar')[0])
     var {user, username, roleId} = req.session
-
+    console.log('user avatar: ' + user.avatar)
     res.render('home', { title: 'Home', user: user, username: username, roleId: roleId});
 }
 var loadPostFormPage = (req, res) => {
