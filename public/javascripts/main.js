@@ -1,5 +1,5 @@
 
-var startIndex = 0, startIndexNoti = 0, loadMore = false
+var startIndex = 0, startIndexNoti = 0, loadMore = false, count_cmts = 0, count_stds = 0, count_posts = 0
 var limit = 10
 const socket = io();
 toastr.options = {
@@ -536,6 +536,9 @@ function addNewPost(accountId, caption, videos, images){
 
       document.getElementById("posts_data").innerHTML = contentHtml + document.getElementById("posts_data").innerHTML;
       startIndex += limit
+      count_posts += 1
+      document.getElementById("count_posts").innerHTML = count_posts;
+
   }})
 }
 function addNewCommentToPost(postId, accountId, content){
@@ -596,6 +599,8 @@ function addNewCommentToPost(postId, accountId, content){
       $('#'+postId).find('.comment-list-group').prepend(contentHtml)
       var currReply = parseInt($('#'+postId).find('.num_reply').text())
       $('#'+postId).find('.num_reply').text(currReply + 1)
+      count_cmts += 1
+      document.getElementById("count_cmts").innerHTML = count_cmts;
     }
   })
 }
@@ -1091,6 +1096,37 @@ function loadRoles(){
     }
   });
 }
+
+function getCounts() {
+  $.ajax({
+    url: "/api/v1/posts/",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(response){
+      count_posts = response.length
+      document.getElementById("count_posts").innerHTML += count_posts;
+    }
+  });
+  $.ajax({
+    url: "/api/v1/comments/",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(response){
+      count_cmts = response.length
+      document.getElementById("count_cmts").innerHTML += count_cmts;
+    }
+  });
+  $.ajax({
+    url: "/api/v1/students/",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(response){
+      count_stds = response.length
+      document.getElementById("count_stds").innerHTML += count_stds;
+    }
+  });
+}
+
 $(document).ready(()=> {
   var isHomePage = $('#home_page'),
       isPersonal = $('#personal_page'),
@@ -1106,6 +1142,7 @@ $(document).ready(()=> {
     getAllDemoNotis();
     getAllDemoTopics();
     getPostsInRange();
+    getCounts();
   } else if (isPersonal.length > 0) {
     getPostsByAccInRange(accountId);
   } else if (isNotiPage.length > 0) {
