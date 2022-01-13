@@ -1,5 +1,5 @@
-let url = 'http://127.0.0.1:3000/api/v1'
-// 'https://tdtusocialmedia.herokuapp.com/api/v1' ||
+require('dotenv').config();
+let url = process.env.DOMAIN_URL
 const fetch = require ("cross-fetch")
 
 function getStudents(success, error){

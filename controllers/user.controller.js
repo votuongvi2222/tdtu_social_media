@@ -11,6 +11,7 @@ var Department = require('../models/department'),
     Student = require('../models/student');
 
 var studentApis = require('../apis/student/student.api.method'),
+    accountApis = require('../apis/account/account.api.method'),
     departmentApis = require('../apis/department/department.api.method');
 
 
@@ -107,7 +108,19 @@ var login = (req, res) => {
                     })
                 //  2.2.3 ---- USER IS ADMIN
                 } else {
-                    req.session.user = account
+                    accountApis.getAccount(account._id, (accountData) => {
+                        // ==== Assign session for authentication
+                        // accountData.account = accountData
+                        req.session.user = accountData
+                        req.session.roleId = account.roleId
+                        req.session.isAuth = true;
+                        console.log('OK dashbord')
+                        console.log(req.session.user)
+                        // ==== GET /
+                        return res.redirect('/');
+                    }, (err) => {
+                        req.flash('error', 'You are not a admin!')
+                    })
                 }
             }
         // 3 ---- NOT FOUND
@@ -124,6 +137,18 @@ var loadHomePage = (req, res) => {
     console.log(user)
     res.render('home', { title: 'Home', user: user, roleId: roleId});
 }
+
+var loadDashboardPage = (req, res) => {
+    var {user} = req.session
+    console.log(user.role != 3)
+    if(user.role != 3){
+        req.flash('error', 'You are not admin!')
+        // ==== GET /login
+        return res.redirect('/login');
+    }
+    res.render('dashboard', { title: 'Dashboard', user: user, roleId: user.roleId});
+}
+
 var loadPostFormPage = (req, res) => {
     var {user, roleId} = req.session
     res.render('post-form', { title: 'Add Noti', user: user, roleId: roleId  });
@@ -160,57 +185,24 @@ var loadPersonalPageById = (req, res) => {
     })
 }
 
-// var addNoti = async (req, res) => {
-//     // =================== check role ===========================
-//     try{
-//         var {user, roleId} = req.session
-//         if(roleId == 1){
-//             res.render('home', { title: 'Home', user: user, roleId: roleId});
-//         }
-//         const files =  req.files.notiFiles
-//         console.log(path.join(__dirname, '../public', 'uploads'))
-//         const fPaths = await Promise.all(files.map(async (file)=>{
-//             const fName = new Date().getTime().toString() + path.extname(file.name)
-//             const fPath = path.join(__dirname, '../public', 'uploads', fName)
-//             console.log(fPath)
-//             return file.mv(fPath)
-//         }))
-//         console.log('Paths')
-//         console.log(fPaths)
-//         // ========================= create topic ==========================
-//         var isExistedTopic = await Topic.findOne({name: req.body.category})
-//         console.log(isExistedTopic)
-//         var topicId = '';
-//         if(isExistedTopic == null){
-//             const topic = new Topic({
-//                 accountId: user.account.id,
-//                 name: req.body.category
-//             })
-//             await topic.save()
-//             topicId = topic._id
-//         }else{
-//             console.log('not')
-//             topicId = isExistedTopic._id
-
-//         }
-//         const department = await Department.findOne({departmentCode: user.code})
-//         const notification = new Notification({
-//             title: req.body.title || '',
-//             content: 'smth',
-//             departmentCode: department.departmentCode || '',
-//             files: fPaths || [],
-//             publishDate: req.body.public_time || new Date().toISOString().slice(0, 10),
-//             topicIds: [topicId] || [],
-//         });
-//         await notification.save();
-//         console.log(notification)
-//         return res.render('home', { title: 'Home', user: user, roleId: roleId});
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// }
-
+var setRole = (req, res) => {
+    var {user} = req.session
+    accountApis.addAccount({
+        username: req.body.uname,
+        password: req.body.pwd,
+        roleId: 2
+    }, (accountData) => {
+        departmentApis.updateDepartment(req.body.dep, {
+            accountId: accountData.id
+        }, (depData) => {
+            res.render('dashboard', { title: 'Dashboard', user: user, roleId: user.roleId});
+        }, (err) => {
+            return res.redirect('/')
+        })
+    }, (err) => {
+        return res.redirect('/')
+    })
+}
 module.exports = {
     loadHomePage: loadHomePage,
     loadAboutPage: loadAboutPage,
@@ -221,5 +213,7 @@ module.exports = {
     loadPostFormPage: loadPostFormPage,
     loadPersonalPageById: loadPersonalPageById,
     // addNoti: addNoti,
-    login: login
+    loadDashboardPage, loadDashboardPage,
+    login: login,
+    setRole: setRole
 }

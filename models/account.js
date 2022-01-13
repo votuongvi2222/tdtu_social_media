@@ -16,7 +16,10 @@ var accountSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    avatar: String,
+    avatar: {
+        type: String,
+        default: 'images/avatar.png'
+    },
 }, { timestamps: true });
 
 accountSchema.methods.comparePassword = function(password) {

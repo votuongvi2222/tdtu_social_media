@@ -2795,6 +2795,21 @@ div.zabuto_calendar div.legend span.badge {
 #cmt_modal, #post_modal {
   z-index: 9999 !important;
 }
+form.dashboard_from {
+  padding: 50px 0;
+  font-family: monospace;
+}
+
+form.dashboard_from .form-floating {
+  margin: 20px;
+}
+form.dashboard_from button.btn.btn-primary {
+  margin-left: 20px;
+}
+.lead {
+    text-align: center;
+    text-transform: uppercase;
+}
 @media (max-width: 768px) {
   .hidden-xs {
     display: none !important;

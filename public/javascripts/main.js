@@ -34,7 +34,7 @@ var getComments = function(pid){
       var commentData = response
       count = commentData.length
       for (var i = 0; i < count; i++) {
-        if($('#account_id').val() == commentData[i].account.id){
+        if($('#account_id').val() == commentData[i].account.id || $('#account_roleId').val() == 3 ){
           box += 
           `
           <div class="update_comment-svg dropdown">
@@ -100,7 +100,7 @@ function getPostsByAccInRange(accountId){
       for (var i = 0; i < postData.length; i++) {
         const [commentData, commentNum] = getComments(postData[i].id);
         // check owner
-        if($('#account_id').val() == postData[i].account.id){
+        if($('#account_id').val() == postData[i].account.id || $('#account_roleId').val() == 3){
           box = 
           `
           <div class="post-alter-icon dropdown">
@@ -261,14 +261,11 @@ function getPostsInRange(){
       let contentHtml = '', box = '', link = ''
       var postData = response
       startIndex += postData.length
-      // if(postData.length < limit){
-      //   console.log('stop')
-      //   $(window).unbind('scroll');
-      // }
+
       for (var i = 0; i < postData.length; i++) {
         const [commentData, commentNum] = getComments(postData[i].id);
         // check owner
-        if($('#account_id').val() == postData[i].account.id){
+        if($('#account_id').val() == postData[i].account.id || $('#account_roleId').val() == 3){
           box = 
           `
           <div class="post-alter-icon dropdown">
@@ -1053,11 +1050,34 @@ function deletePost(el){
     }
   })
 }
+
+function loadRoles(){
+  $.ajax({
+    url: "/api/v1/departments/",
+    type: "GET",
+    contentType: 'application/json',
+    success: function(response){
+      let contentHtml = ''
+      var departmentData = response
+      
+      for (var i = 0; i < departmentData.length; i++) {
+        contentHtml += 
+        `
+        <option value=${departmentData[i].id}>
+        ${departmentData[i].name}
+        </option>
+        `
+      }
+      document.getElementById("floatingSelect").innerHTML += contentHtml;
+    }
+  });
+}
 $(document).ready(()=> {
   var isHomePage = $('#home_page'),
       isPersonal = $('#personal_page'),
       isNotiPage = $('#noti_page')
       isNotiFormPage = $("#noti_form_page")
+      isDashboardPage = $("#dashboard_page")
   var isLoadNoti = false,
       isLoadTopic = false,
       isLoadDep = false
@@ -1073,8 +1093,10 @@ $(document).ready(()=> {
     if(isLoadNoti == false)
       getNotificationsInRange()
     isLoadNoti = true
-  } else if (isNotiFormPage) {
+  } else if (isNotiFormPage.length > 0) {
     loadTopicOptions()
+  } else if (isDashboardPage.length > 0) {
+    loadRoles()
   }
   // $(window).on('scroll', function() {
   //   if ($(window).scrollTop() >= $('#posts_data').offset().top + $('#posts_data').outerHeight() - window.innerHeight) {

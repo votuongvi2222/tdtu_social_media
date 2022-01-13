@@ -67,14 +67,6 @@ var putDepartmentById = async (req, res) => {
     try {
         const department = await Department.findById(req.params.id);
         const account = await Account.findById(req.body.accountId);
-        department.name = req.body.name || department.name;
-        department.departmentCode = req.body.code || department.departmentCode;
-        department.location = req.body.location || department.location;
-        department.email = req.body.email || department.email;
-        department.website = req.body.website || department.website;
-        department.phoneNumber = req.body.phoneNumber || department.phoneNumber;
-        department.foundedYear = req.body.foundedYear || department.foundedYear;
-        department.reposibilities= req.body.reposibilities || department.reposibilities;
         department.accountId = account._id || department.accountId;
         await department.save();
         return res.json({

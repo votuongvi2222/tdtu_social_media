@@ -11,6 +11,11 @@ var getAccounts = (req, res) => {
                 id: account._id,
                 username: account.username,
                 avatar: account.avatar,
+                account: {
+                    id: account._id,
+                    username: account.username,
+                    avatar: account.avatar
+                },
                 createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                 updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
@@ -28,6 +33,11 @@ var getAccountById = (req, res) => {
             id: account._id,
             username: account.username,
             avatar: account.avatar,
+            account: {
+                id: account._id,
+                username: account.username,
+                avatar: account.avatar
+            },
             createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
             updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
             role: account.roleId
@@ -50,6 +60,11 @@ var putAccountById = (req, res) => {
                 id: account._id,
                 username: account.username,
                 avatar: account.avatar,
+                account: {
+                    id: account._id,
+                    username: account.username,
+                    avatar: account.avatar
+                },
                 createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                 updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
@@ -70,6 +85,11 @@ var postAccount = (req, res) => {
             id: account._id,
             username: account.username,
             avatar: account.avatar,
+            account: {
+                id: account._id,
+                username: account.username,
+                avatar: account.avatar
+            },
             createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
             updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
             role: account.roleId
@@ -87,6 +107,11 @@ var deleteAccountById = (req, res) => {
                 id: account._id,
                 username: account.username,
                 avatar: account.avatar,
+                account: {
+                    id: account._id,
+                    username: account.username,
+                    avatar: account.avatar
+                },
                 createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                 updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId

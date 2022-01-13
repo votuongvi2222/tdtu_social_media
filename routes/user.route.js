@@ -72,6 +72,11 @@ router.get('/init', async (req, res) => {
 //  @route GET /
 router.get('/', ensureAuth, userControllers.loadHomePage);
 
+
+router.get('/dashboard', ensureAuth, userControllers.loadDashboardPage);
+router.post('/dashboard', userControllers.setRole);
+
+
 //  @desc Load login page
 //  @route GET /login
 router.get('/login', ensureGuest, userControllers.loadLoginPage);
@@ -79,6 +84,8 @@ router.get('/login', ensureGuest, userControllers.loadLoginPage);
 //  @desc Load login page
 //  @route GET /login
 router.post('/login', userControllers.login);
+
+
 
 //  @desc Load form to add new notice
 //  @route GET /add

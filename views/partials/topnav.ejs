@@ -38,6 +38,16 @@
                                 <% } else{ %>
                                 <li><button class="dropdown-item" type="button">User Information</button></li>
                                 <% } %>
+                                <% if(roleId == 3){ %>
+                                    <li>
+                                        <button class="dropdown-item" type="button">
+                                            <a href="/dashboard">
+                                                Dashboard
+                                            </a>
+                                        </button>
+                                    </li>
+                                <% } %>
+                                <li><button class="dropdown-item" type="button">Hi <%= user.account.username %></button></li>
                             </ul>
                         </div>
                     </li>
