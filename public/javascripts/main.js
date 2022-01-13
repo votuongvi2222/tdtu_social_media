@@ -973,6 +973,41 @@ function getAllDemoNotis(){
     }
   });
 }
+function getAllDemoNotisPerDep(){
+  $.ajax({
+    url: "/api/v1/notifications/department/"+$('#department_code').val(),
+    type: "GET",
+    contentType: 'application/json',
+    success: function(response){
+
+      let contentHtml = ''
+      var notiData = response
+      
+      for (var i = 0; i < notiData.length; i++) {
+        contentHtml += 
+        `
+        <a href="/noti" class="noti_link">
+          <li class="related-item todo-list-item">
+              <div class="notice_info-div">
+                  <div class="notice_author-div notice_info-item">
+                      <small>[${notiData[i].department.name}]</small>
+                  </div>
+                  <div class="public_date-div notice_info-item">
+                      <small>${notiData[i].publishDate.split(',')[1]}</small>
+                  </div>
+              </div>
+              <div class="sidebar-box notice-item">
+                  <h3>${notiData[i].title}</h3>
+              </div>
+          </li>
+        </a>
+        `
+        
+      }
+      document.getElementById("demo_noti_dep-list").innerHTML += contentHtml;
+    }
+  });
+}
 function openEditCmt(el){
   $('#cmt_modal').show();
   var cmt = $(el).parents('.list-comment')[0]
@@ -1095,6 +1130,8 @@ $(document).ready(()=> {
     isLoadNoti = true
   } else if (isNotiFormPage.length > 0) {
     loadTopicOptions()
+    getAllDemoNotis()
+    getAllDemoNotisPerDep()
   } else if (isDashboardPage.length > 0) {
     loadRoles()
   }
@@ -1149,6 +1186,8 @@ $(document).ready(()=> {
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
             sendMessage(data.department.name)
+            getAllDemoNotis()
+            getAllDemoNotisPerDep()
             console.log(data)
         },
         error: function () {

@@ -94,7 +94,7 @@ var getNotificationsByTopicId =  async (req, res) => {
 
 var getNotificationsByDepartmentId =  async (req, res) => {
     try {
-        const notifications = await Notification.find({departmentCode: [req.params.id]})
+        const notifications = await Notification.find({departmentCode: [req.params.id]}).sort({'createdAt': -1})
         const notificationsInfo = await Promise.all(
             notifications.map(async (notification) => {
                 const department = await Department.findOne({departmentCode: notification.departmentCode})
