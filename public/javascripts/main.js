@@ -1104,7 +1104,7 @@ function getCounts() {
     contentType: 'application/json',
     success: function(response){
       count_posts = response.length
-      document.getElementById("count_posts").innerHTML += count_posts;
+      document.getElementById("count_posts").innerHTML = count_posts;
     }
   });
   $.ajax({
@@ -1113,7 +1113,7 @@ function getCounts() {
     contentType: 'application/json',
     success: function(response){
       count_cmts = response.length
-      document.getElementById("count_cmts").innerHTML += count_cmts;
+      document.getElementById("count_cmts").innerHTML = count_cmts;
     }
   });
   $.ajax({
@@ -1122,7 +1122,7 @@ function getCounts() {
     contentType: 'application/json',
     success: function(response){
       count_stds = response.length
-      document.getElementById("count_stds").innerHTML += count_stds;
+      document.getElementById("count_stds").innerHTML = count_stds;
     }
   });
 }
