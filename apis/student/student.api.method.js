@@ -1,8 +1,9 @@
-let url = 'https://tdtusocialmedia.herokuapp.com/api' | 'http://127.0.0.1:3000/api'
+let url = 'http://127.0.0.1:3000/api/v1'
+// 'https://tdtusocialmedia.herokuapp.com/api/v1' ||
 const fetch = require ("cross-fetch")
 
-function getAccounts(success, error){
-    fetch(url + "/accounts", {
+function getStudents(success, error){
+    fetch(url + "/students", {
         method:'get',
         headers:{
             'Content-Type': 'application/json'
@@ -13,8 +14,8 @@ function getAccounts(success, error){
     .catch(error)
 }
 
-function getAccount(id, success, error){
-    fetch(url + "/account/" + id, {
+function getStudent(id, success, error){
+    fetch(url + "/student/" + id, {
         method:'get',
         headers:{
             'Content-Type': 'application/json'
@@ -25,46 +26,61 @@ function getAccount(id, success, error){
     .catch(error)
 }
 
-function deleteAccount(id,success, error){
-    fetch(url+"/account/"+id, {
+function getStudentByAccId(id, success, error){
+    fetch(url + "/student/acc/" + id, {
+        method:'get',
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data=>data.json())
+    .then(success)
+    .catch(error)
+}
+
+function deleteStudent(id,success, error){
+    fetch(url+"/student/"+id, {
         method:'delete',
         headers:{
             'Content-Type': 'application/json'
         }
     })
-    .then(data=>data.json())
+    .then(data=>{
+        data.json()
+    })
     .then(success)
     .catch(error)
 }
 
-function updateAccount(id, account,success, error){
-    fetch(url+"/account/"+id, {
+function updateStudent(id, student,success, error){
+    fetch(url+"/student/"+id, {
         method:'put',
         headers:{
             'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify(account)
+        body: JSON.stringify(student)
     })
     .then(data=>data.json())
     .then(success)
     .catch(error)
 }
-function addAccount(account,success, error){
-    fetch(url+"/account", {
+function addStudent(student,success, error){
+    fetch(url+"/student", {
         method:'post',
         headers:{
             'Content-Type': 'application/json; charset=utf-8'
         },
-        body: JSON.stringify(account)
+        body: JSON.stringify(student)
     })
     .then(data=>data.json())
     .then(success)
     .catch(error)
 }
 module.exports = {
-    getAccount: getAccount,
-    getAccounts: getAccounts,
-    updateAccount: updateAccount,
-    deleteAccount: deleteAccount,
-    addAccount: addAccount
+    getStudent: getStudent,
+    getStudentByAccId: getStudentByAccId,
+    getStudents: getStudents,
+    updateStudent: updateStudent,
+    deleteStudent: deleteStudent,
+    addStudent: addStudent
 }

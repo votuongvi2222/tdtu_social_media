@@ -2,6 +2,7 @@ require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var fileUpload = require('express-fileupload');
 var cookieParser = require('cookie-parser');
 var session = require('express-session')
 var flash = require('connect-flash');
@@ -11,7 +12,15 @@ var passport = require('passport')
 var indexRouter = require('./routes/user.route'),
     authRouter = require('./routes/auth.route'),
     studentApiRouter = require('./apis/student/student.api.route'),
-    accountApiRouter = require('./apis/account/account.api.route');
+    accountApiRouter = require('./apis/account/account.api.route'),
+    departmentApiRouter = require('./apis/department/department.api.route'),
+    classApiRouter = require('./apis/class/class.api.route'),
+    postApiRouter = require('./apis/post/post.api.route'),
+    topicApiRouter = require('./apis/topic/topic.api.route'),
+    commentApiRouter = require('./apis/comment/comment.api.route'),
+    likeApiRouter = require('./apis/like/like.api.route'),
+    notificationApiRouter = require('./apis/notification/notification.api.route');
+
 
 var app = express();
 require('./config/passport')(passport)
@@ -21,12 +30,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tdtusocialmedia
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(fileUpload())
 // session
 app.use(session({
   secret: 'tdtusocialmedia',
   resave: true,
   saveUninitialized: true,
-  cookie: { maxAge: 30*60*1000 }
+  cookie: { maxAge: 60*60*1000 }
 }))
 app.use(flash());
 
@@ -52,7 +62,13 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/api/v1', accountApiRouter);
 app.use('/api/v1', studentApiRouter);
-
+app.use('/api/v1', departmentApiRouter);
+app.use('/api/v1', postApiRouter);
+app.use('/api/v1', classApiRouter);
+app.use('/api/v1', likeApiRouter);
+app.use('/api/v1', commentApiRouter);
+app.use('/api/v1', topicApiRouter);
+app.use('/api/v1', notificationApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

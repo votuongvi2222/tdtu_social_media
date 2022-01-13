@@ -8,137 +8,11 @@
 
 <body>
     <div class="background-cover"></div>
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Class Information</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <form action="" method="post" class="create">
-                    <div class="field">
-                        <label for="subject">Subject</label>
-                        <input id="subject" type="text" name="subject" placeholder="Subject" value="" >
-                    </div>
-                    <div class="field">
-                        <label for="semester">Semester</label>
-                        <input id="semester" type="text" name="semester" placeholder="Semester" value="" >
-                    </div>
-                    <div class="field">
-                        <label for="room">Room</label>
-                        <input id="room" type="text" name="room" placeholder="Room" value="" >
-                    </div>
-                    <div class="field">
-                        <p><label for="code">Code</label></p>
-                        <p><input id="code" type="text" name="code" placeholder="Code" readonly=readonly value=""></p>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" name="edit-class-btn" class="btn btn-primary">Save change</button>
-                    </div>
-                </form>
-                </div>
-                
-            </div>
-        </div>
-    </div>  
-    <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Class Information</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <p>Are you sure about that?</p>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="confirm" name="delete-btn" class="btn btn-primary" data-dismiss="model">Confirm</button>
-                    </form>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Invite people</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <form method="POST" action="">
-                    <div class="modal-body">
-                        Code : <i>123</i>
-                        <p>Or send mail to invite, type email below</p>
-                        <input type="text" class="invited-email" name="invited-email">
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" name="add-student-btn">Save change</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <div id="wrap" class="wrap-nicescroll">
         <!-- TOP NAVIGATION -->
         <%- include("./partials/topnav") %>
         <!-- MAIN NAVIGATION -->
-        <div id="header">
-            <div class="container clearfix">
-
-                <div class="row">
-                    <div class="logo col-md-4">
-                        <a href="/">
-                            <img src="images/logo.png" alt="" class="logo-default lazyloaded">
-                        </a>
-                    </div>
-                    <nav class="navigation col-md-8 hidden-xs">
-                        <div class="header-menu">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="/about">How it works?</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/noti">Notification</a>
-                                </li>
-                                <li class="nav-item menu-item-pq">
-                                    <a class="nav-link add_noti-btn" id="add_noti-btn" href="/add">Add Notification</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                    <nav class="navigation_mobile navigation_mobile_main">
-                        <div class="infocenter_mobile_click infocenter_mobile_click_close">
-                            Go to ...
-                        </div>
-                        <ul>
-                            <li>
-                                <a href="/about">How it works?</a>
-                            </li>
-                            <li>
-                                <a href="">Notification</a>
-                            </li>
-                            <li>
-                                <a href="#">Calendar</a>
-                            </li>
-                            <li class="menu-item-pq">
-                                <a id="mobile_add_noti-btn" class="add_noti-btn" href="/add">Add Notification</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                </nav>
-            </div>
-        </div>
+        <%- include("./partials/header") %>
 
         <div class="breadcrumbs">
             <div class="container">
@@ -151,10 +25,6 @@
                                 <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                             </svg>
 
-                            <ul class="list-group">
-                                <li class="list-group-item" data-toggle="modal" data-target="#staticBackdrop">Edit class</li>
-                                <li class="list-group-item" data-toggle="modal" data-target="#staticBackdrop2">Remove class</li>
-                            </ul>
                         </span>
                         Khoa Công nghệ thông tin
                         </h1>
@@ -195,24 +65,6 @@
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                     <span class="hidden-xs">Topics</span>    
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="people-tab" data-toggle="tab" href="#people" role="tab"
-                                    aria-controls="people" aria-selected="false">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-                                    </svg>
-                                    <span class="hidden-xs">People</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="score-tab" data-toggle="tab" href="#score" role="tab"
-                                    aria-controls="score" aria-selected="false">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
-                                    </svg>
-                                    <span class="hidden-xs">Score</span>
                                 </a>
                             </li>
                         </ul>
@@ -279,155 +131,85 @@
                                     <div class="col-md-3 hidden-xs">
                                         <div class="topic-nav">
                                             <h3>All topics</h3>
-
-                                            <button class="btn btn-link btn-block text-left topic-label" type="button" data-toggle="collapse" data-target="#coll1" aria-expanded="true" aria-controls="coll1">
+                                            <button class="btn btn-link btn-block text-left topic-label" type="button" data-toggle="collapse" data-target="#topic1" aria-expanded="true" aria-controls="topic1">
                                                 HỌC PHÍ
+                                            </button>
+                                            <button class="btn btn-link btn-block text-left topic-label" type="button" data-toggle="collapse" data-target="#topic2" aria-expanded="true" aria-controls="topic2">
+                                                HỌC VỤ
                                             </button>
                                         </div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="accordion topic_stream-list noti-list" id="accordionExample">
+                                        <div class="accordion topic_stream-list noti-list" id="topic_container">
                                             
                                             <div class="card">
-                                                <div class="card-header" id="heading1">
+                                                <div class="card-header" id="topic_heading1">
                                                 <h2 class="mb-0">
-                                                    <button class="btn btn-link btn-block text-left topic-label" type="button" data-toggle="collapse" data-target="#coll1" aria-expanded="true" aria-controls="coll1">
+                                                    <button class="btn btn-link btn-block text-left topic-label" type="button" data-toggle="collapse" data-target="#topic1" aria-expanded="true" aria-controls="topic1">
                                                     HỌC PHÍ
                                                     </button>
                                                 </h2>
                                                 </div>
 
-                                                <div id="coll1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        
-                                                        <li class="list-group-item todo-list-item">
-                                                            <span>
-                                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path fill-rule="evenodd" d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"/>
-                                                                    <path fill-rule="evenodd" d="M4.5 10.5A.5.5 0 0 1 5 10h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
-                                                                </svg>
-                                                                <i>
-                                                                    <a href="post-detail.php?ci=<?php echo $assignmentInfoArray['class_id'];?>&pi=<?php echo $assignmentInfoArray['id'];?>">
-                                                                        Bai tap 1
-                                                                    </a>
-                                                                </i>
-                                                            </span>
-                                                            <small class="limit-time">Due to 23/02/2020</small>
+                                                <div id="topic1" class="collapse" aria-labelledby="topic_heading1" data-parent="#topic_container">
+                                                    <div class="card-body">
+                                                        <ul>
                                                             
-                                                        </li>
-                                                    </ul>
+                                                            <li class="list-group-item todo-list-item">
+                                                                <span>
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"/>
+                                                                        <path fill-rule="evenodd" d="M4.5 10.5A.5.5 0 0 1 5 10h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                                                                    </svg>
+                                                                    <i>
+                                                                        <a href="post-detail.php?ci=<?php echo $assignmentInfoArray['class_id'];?>&pi=<?php echo $assignmentInfoArray['id'];?>">
+                                                                            Bai tap 1
+                                                                        </a>
+                                                                    </i>
+                                                                </span>
+                                                                <small class="limit-time">Due to 23/02/2020</small>
+                                                                
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="topic_heading2">
+                                                <h2 class="mb-0">
+                                                    <button class="btn btn-link btn-block text-left topic-label" type="button" data-toggle="collapse" data-target="#topic2" aria-expanded="true" aria-controls="topic2">
+                                                    HỌC VỤ
+                                                    </button>
+                                                </h2>
+                                                </div>
+
+                                                <div id="topic2" class="collapse" aria-labelledby="topic_heading2" data-parent="#topic_container">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            
+                                                            <li class="list-group-item todo-list-item">
+                                                                <span>
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z"/>
+                                                                        <path fill-rule="evenodd" d="M4.5 10.5A.5.5 0 0 1 5 10h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                                                                    </svg>
+                                                                    <i>
+                                                                        <a href="post-detail.php?ci=<?php echo $assignmentInfoArray['class_id'];?>&pi=<?php echo $assignmentInfoArray['id'];?>">
+                                                                            Bai tap 1
+                                                                        </a>
+                                                                    </i>
+                                                                </span>
+                                                                <small class="limit-time">Due to 23/02/2020</small>
+                                                                
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="people" role="tabpanel" aria-labelledby="people-tab">
-                                <div class="people-info">
-                                    <div class="teacher-info-list">
-                                        <h3>Teacher</h3>
-                                        <div class="add-people-icon" data-toggle="modal" data-target="#staticBackdrop1">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                                            </svg>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <ul class="list-group list-group-flush teacher_list">
-                                        
-                                            <li class="list-group-item">
-                                                <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                Dương Hoàng Nam
-                                            </li>
-                                            <li class="list-group-item"></li>
-                                        </ul>
-                                    </div>
-                                    <div class="student-info-list">
-                                        <h3>Student</h3>
-                                        <div class="add-people-icon"  data-toggle="modal" data-target="#staticBackdrop1">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                                            </svg>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                            <form method="POST">
-                                                <button type="submit" class="btn btn-dark" name="remove-people-btn">Remove</button>
-                                                <ul class="list-group list-group-flush teacher_list">
-                                                    <li class="list-group-item">
-                                                        <input class="to-check" name="check_list" type="checkbox" id="" value="">
-                                                        <label for="">
-                                                            <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                            Võ Tường Vi 1
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <input class="to-check" name="check_list" type="checkbox" id="" value="">
-                                                        <label for="">
-                                                            <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                            Võ Tường Vi 2
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <input class="to-check" name="check_list" type="checkbox" id="" value="">
-                                                        <label for="">
-                                                            <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                            Võ Tường Vi 3
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item"></li>
-                                                </ul>
-                                            </form>
-                                            <!-- <ul class="list-group list-group-flush teacher_list">
-                                            
-                                                <li class="list-group-item">
-                                                    <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                    Võ Tường Vi
-
-                                                </li>
-                                                <li class="list-group-item"></li>
-                                            </ul> -->
-                                    </div>
-                                </div>
-                                    
-                            </div>
-                            <div class="tab-pane fade" id="score" role="tabpanel" aria-labelledby="score-tab">  
-                                
-                                <h6>
-                                    <i><a href=""></a></i>
-                                </h6>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th class="table-active" scope="col">Index</th>
-                                                <th class="table-active" scope="col">Full Name</th>
-                                                <th class="table-active" scope="col">Files upload</th>
-                                                <th class="table-active" scope="col">Date turn in</th>
-                                                <th class="table-active" scope="col">Score</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Võ Tường Vi</td>
-                                                <td><a href=''>file.txt</a><br></td>
-                                                <td>10/02/2020</td>
-                                                <td>
-                                                    <form action="verify.php?si=<?php echo $fileInfo['user_id'];?>&pi=<?php echo $fileInfo['post_id'];?>&ci=<?php echo $fileInfo['class_id'];?>" method="Post">
-                                                        <input class="score-input" id="score" name="score" type="number" min="0" max=100 value="">
-                                                        
-                                                        <input type="submit" name="add-score-btn" value="Save">
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <caption>Number of turn-in: 12</caption>
-                                    </table>
-                                </div>
-                            </div>
-
                         </div> 
                     </div>
                     <div class="col"></div>
@@ -435,43 +217,7 @@
             </div>
         </div>
         <!-- WEB INFORMATION -->
-        <footer class="footer author-info">
-            <div class="contact-box">
-                <h3>Contact</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                        </svg>
-                        19, Nguyen Huu Tho, Tan Phong, district 7, HCM city
-                    </li>
-                    <li class="list-group-item">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z" />
-                        </svg>
-                        (84) 0123 456 78
-                    </li>
-                    <li class="list-group-item">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
-                        </svg>
-                        519h0098@student.tdtu.edu.vn
-                    </li>
-                </ul>
-            </div>
-            <div class="copyright">
-                <div class="copyright-pannel">Copyright 2020 by </div>
-                <div class="copyright-author">
-                    DeveLOVEbug <img src="images/team-icon.png" alt="team-icon">
-                </div>
-            </div>
-        </footer>
+        <%- include("./partials/footer") %>
     </div>
 </body>
 

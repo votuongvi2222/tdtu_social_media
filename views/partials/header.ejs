@@ -1,0 +1,50 @@
+<div id="header">
+    <div class="container clearfix">
+
+        <div class="row">
+            <div class="logo col-md-4">
+                <a href="/">
+                    <img src="images/logo.png" alt="" class="logo-default lazyloaded">
+                </a>
+            </div>
+            <nav class="navigation col-md-8 hidden-xs">
+                <div class="header-menu">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/about">How it works?</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/noti">Notification</a>
+                        </li>
+                        <% if(roleId != 1){ %>
+                        <li class="nav-item menu-item-pq">
+                            <a class="nav-link add_noti-btn" id="add_noti-btn" href="/add">Add Notification</a>
+                        </li>
+                        <% } %>
+
+                    </ul>
+                </div>
+            </nav>
+            <nav class="navigation_mobile navigation_mobile_main">
+                <div class="infocenter_mobile_click infocenter_mobile_click_close">
+                    Go to ...
+                </div>
+                <ul>
+                    <li>
+                        <a href="/about">How it works?</a>
+                    </li>
+                    <li>
+                        <a href="/noti">Notification</a>
+                    </li>
+                    <% if(roleId != 1){ %>
+                    <li class="menu-item-pq">
+                        <a id="mobile_add_noti-btn" class="add_noti-btn" href="/add">Add Notification</a>
+                    </li>
+                    <% } %>
+
+                </ul>
+            </nav>
+        </div>
+        </nav>
+    </div>
+</div>

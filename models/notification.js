@@ -2,8 +2,7 @@ var mongoose = require('mongoose');
 
 var notificationSchema = mongoose.Schema({
     title: String,
-    accountId: String,
-    departmentId: String,
+    departmentCode: String,
     content: String,
     files: [String],
     publishDate: Date,

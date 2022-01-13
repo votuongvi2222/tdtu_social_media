@@ -16,6 +16,7 @@ var accountSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    avatar: String,
 }, { timestamps: true });
 
 accountSchema.methods.comparePassword = function(password) {

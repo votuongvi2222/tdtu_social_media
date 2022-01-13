@@ -6,6 +6,8 @@
 </head>
 
 <body>
+    <input type="hidden" id="home_page">
+
     <!-- BACKGROUD COVER -->
     <div class="background-cover"></div>
     <!-- WEB LAYOUT -->
@@ -13,54 +15,7 @@
         <!-- TOP NAVIGATION -->
         <%- include("./partials/topnav") %>
         <!-- MAIN NAVIGATION -->
-        <div id="header">
-            <div class="container clearfix">
-
-                <div class="row">
-                    <div class="logo col-md-4">
-                        <a href="/">
-                            <img src="images/logo.png" alt="" class="logo-default lazyloaded">
-                        </a>
-                    </div>
-                    <nav class="navigation col-md-8 hidden-xs">
-                        <div class="header-menu">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="/about">How it works?</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/noti">Notification</a>
-                                </li>
-                                <li class="nav-item menu-item-pq">
-                                    <a class="nav-link add_noti-btn" id="add_noti-btn" href="/add">Add Notification</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                    <nav class="navigation_mobile navigation_mobile_main">
-                        <div class="infocenter_mobile_click infocenter_mobile_click_close">
-                            Go to ...
-                        </div>
-                        <ul>
-                            <li>
-                                <a href="/about">How it works?</a>
-                            </li>
-                            <li>
-                                <a href="">Notification</a>
-                            </li>
-                            <li>
-                                <a href="#">Calendar</a>
-                            </li>
-                            <li class="menu-item-pq">
-                                <a id="mobile_add_noti-btn" class="add_noti-btn" href="/add">Add Notification</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                </nav>
-            </div>
-        </div>
-
+        <%- include("./partials/header") %>
         <!-- SEARCH BOX | BANNER -->
         <div class="banner section-warp infocenter-infotex rocket-lazyload">
             <div class="container clearfix">
@@ -74,7 +29,7 @@
                             <div>
                                 <div id="live-search">
                                     <div id="search-wrap">
-                                        <form method="get" action="classes.php" id="searchform"
+                                        <form method="get" id="searchform"
                                             class="form-style form-style-2 container">
                                             <p class="row">
                                                 <input type="text"
@@ -168,39 +123,17 @@
                                             <!-- LIST OF POSTS -->
                                             <!-- <input id="messageInput" type="text" placeholder="Type message and hit enter"> -->
                                             <!-- POST EDITOR BOX -->
+                                            <% if(roleId != 2){ %>
                                             <div class="post_editor-container">
                                                 <div class="post_editor-btn" id="post_editor-btn" role="button">
                                                     <div class="avatar-container">
                                                         <div class="img-box">
-                                                            <% if(roleId == '1' || roleId == 1) { %>
-                                                            <img src="<%= user.avatar%>" alt="user_avatar">
-                                                            <% } else { %>
-                                                            <img src="images/avatar.png" alt="default-avatar">
-                                                            <% } %>
+                                                            <img src="<%= user.account.avatar%>" alt="user_avatar">
                                                         </div>
                                                     </div>
                                                     <div class="post_instruction-btn">Write something to share...</div>
                                                 </div>
                                                 <div class="post_editor-expand" id="post_editor-expand">
-                                                    <!-- <div class="editor-header">
-                                                        <div class="editor-nav">
-                                                            <div class="editor-icon">
-                                                                <div class="editor-icon-box">
-                                                                    <svg focusable="false" width="24" height="24" viewBox="0 0 24 24" class="editor-svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12z"></path></svg>
-                                                                </div>
-                                                            </div>
-                                                            <div class="editor-title">Post</div>
-                                                            <div class="editor_distance-header"></div>
-                                                            <div class="editor_close-icon">
-                                                                <div class="bg_hover"></div>
-                                                                <div class="editor_close-icon-box">
-                                                                    <div class="close-icon">
-                                                                        <svg focusable="false" width="24" height="24" viewBox="0 0 24 24" class=" NMm5M"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                                                     <div class="editor-body">
                                                         <div class="editor-body-container">
                                                             <div class="editor-textarea-box">
@@ -210,64 +143,14 @@
                                                                 <div class="content_editor_focus-line"></div>
                                                             </div>
                                                             <div class="editor-toolbar" role="toolbar">
-                                                                <div role="button" class="bold-btn toolbar-btn" aria-label="Bold" tabindex="0" data-toggle="tooltip" title="Bold" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                    <div class="hidden_bold-label hidden-toolbar-label"></div>
-                                                                    <span class="text_bold-label text-toolbar-label">
-                                                                        <span class="toolbar-btn-icon">
-                                                                            <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_bold</span>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div role="button" class="italic-btn toolbar-btn" aria-label="Italic" tabindex="-1" data-toggle="tooltip" title="Italic" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                    <div class="hidden_italic-label hidden-toolbar-label"></div>
-                                                                    <span class="text_italic-label text-toolbar-label">
-                                                                        <span class="toolbar-btn-icon">
-                                                                            <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_italic</span>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div role="button" class="underline-btn toolbar-btn" aria-label="Underline" tabindex="-1" data-toggle="tooltip" title="Underline" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                    <div class="hidden_underline-label hidden-toolbar-label"></div>
-                                                                    <span class="text_underline-label text-toolbar-label">
-                                                                        <span class="toolbar-btn-icon">
-                                                                            <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_underlined</span>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div role="button" class="bulleted_list-btn toolbar-btn" aria-label="Bulleted list" tabindex="-1" data-toggle="tooltip" title="Bulleted list" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                    <div class="hidden_bulleted_list-label hidden-toolbar-label"></div>
-                                                                    <span class="text_bulleted_list-label text-toolbar-label">
-                                                                        <span class="toolbar-btn-icon">
-                                                                            <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_list_bulleted</span>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                                <div role="button" class="remove_formatting-btn toolbar-btn" aria-label="Remove formatting" tabindex="-1" data-toggle="tooltip" title="Remove formatting" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                    <div class="hidden_remove_formatting-label hidden-toolbar-label"></div>
-                                                                    <span class="text_remove_formatting-label text-toolbar-label">
-                                                                        <span class="toolbar-btn-icon">
-                                                                            <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_clear</span>
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="editor-footer">
-                                                        <div class="reference_link-nav">
+                                                        <div class="reference_link-nav" >
                                                             <div class="reference_link-tabs">
                                                                 <div class="reference_link-tab">
-                                                                    <div role="button" class="reference_link-btn" tabindex="0" data-toggle="tooltip" title="Add Google Drive file" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_reference-label"></div>
-                                                                        <span class="reference_link-label">
-                                                                            <span class="reference_link-label-icon">
-                                                                                <svg enable-background="new 0 0 24 24" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M14.35,2.5h-4.7c-0.71,0-1.37,0.38-1.73,0.99L1.58,14.4c-0.36,0.62-0.36,1.38-0.01,2l2.35,4.09c0.36,0.62,1.02,1,1.73,1 h12.68c0.72,0,1.38-0.38,1.73-1l2.35-4.09c0.36-0.62,0.35-1.38-0.01-2L16.08,3.49C15.72,2.88,15.06,2.5,14.35,2.5z M18.34,19.5H5.66 l-2.35-4.09L9.65,4.5h4.7l6.34,10.91L18.34,19.5z M12.9,7.75h-1.8l-4.58,7.98L7.25,17h9.5l0.73-1.27L12.9,7.75z M9.25,15L12,10.2 l2.75,4.8H9.25z"></path></svg>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="reference_link-tab">
-                                                                    <div role="button" class="reference_link-btn" tabindex="0" data-toggle="tooltip" title="Upload file" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
+                                                                    <div id="upload_image-btn" role="button" class="reference_link-btn" tabindex="0" data-toggle="tooltip" title="Upload image" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
                                                                         <div class="hidden_reference-label"></div>
                                                                         <span class="reference_link-label">
                                                                             <span class="reference_link-label-icon">
@@ -277,23 +160,43 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="reference_link-tab">
-                                                                    <div role="button" class="reference_link-btn" tabindex="0" data-toggle="tooltip" title="Add link" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_reference-label"></div>
-                                                                        <span class="reference_link-label">
-                                                                            <span class="reference_link-label-icon">
-                                                                                <svg focusable="false"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="reference_link-tab">
-                                                                    <div role="button" class="reference_link-btn" tabindex="0" data-toggle="tooltip" title="Add Youtube video" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
+                                                                    <div role="button" class="reference_link-btn" tabindex="0" data-toggle="modal" data-target="#exampleModal" " title="Add Youtube video" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
                                                                         <div class="hidden_reference-label"></div>
                                                                         <span class="reference_link-label">
                                                                             <span class="reference_link-label-icon">
                                                                                 <span class="ytb-icon" aria-hidden="true"></span>
                                                                             </span>
                                                                         </span>
+                                                                    </div>
+
+                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <img class="ytb_logo" src="images/ytb.svg" alt="" srcset="">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="ytb_search-container">
+                                                                                        <div class="search_bg">
+                                                                                            <img src="https://www.gstatic.com/newt/images/newt_uploadvideo@2x.gif" alt="" srcset="">
+                                                                                        </div>
+                                                                                        <form>
+                                                                                            <div class="input-group">
+                                                                                                <input id="ytb_link" type="text" class="form-control" placeholder="Search Youtube or paste url" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+                                                                                                <div class="input-group-append" id="button-addon4">
+                                                                                                <button class="btn btn-outline-secondary" type="button">Search</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    
+                                                                                    <div id="videoListContainer"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -312,8 +215,43 @@
                                                                 </span>
                                                             </div>
                                                         </div>
+                                                        
+                                                    </div>
+                                                    <div class="post_detail_extra">
+                                                        <ul class="question_poll_item question_upload_item ui-sortable">
+                                                            <li class='poll_li_1'>
+                                                                <div class='poll-li'>
+                                                                    <div class='fileinputs'> 
+                                                                        <input type='file' class='file' name='files[]' multiple>
+                                                                        <div class='fakefile'> 
+                                                                            <button type='button' class='button small margin_0'>Select file</button>
+                                                                            <span>
+                                                                                <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-upload' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                                                                                    <path fill-rule='evenodd' d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z' />
+                                                                                    <path fill-rule='evenodd' d='M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z' />
+                                                                                </svg>
+                                                                                Browse
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class='del-poll-li'>
+                                                                            <svg width='1em' height='1em' viewBox='0 0 16 16' class='bi bi-x-square-fill' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                                                                                <path fill-rule='evenodd' d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z' />
+                                                                            </svg> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <button class="show-files-detail" type="button" id="show_file_detail-btn" ></button>
+                                                        <p id="files-detail"></p>
+                                                        <div class="clearfix"></div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <% } %>
+                                            <div class="post_stream-container">
+                                               <div class="stream-list" id="posts_data">
+                                                </div> 
                                             </div>
                                         </div>
                                         <!-- TDTU NOTIFICATION SIDEBAR -->
@@ -322,99 +260,16 @@
                                                 <h3 class="widget_title" data-target="">
                                                     <a href="/noti" class="notifications_link widget_header-link" id="notifications_link">Notification</a>
                                                 </h3>
-                                                <ul class="related-posts" data-offset="0">
-                                                    <a href="/noti/noti_title+id" class="noti_link">
-                                                        <li class="related-item todo-list-item">
-                                                            <div class="notice_info-div">
-                                                                <div class="notice_author-div notice_info-item">
-                                                                    <small>[Khoa Công nghệ thông tin]</small>
-                                                                </div>
-                                                                <div class="public_date-div notice_info-item">
-                                                                    <small>22/02/2020</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sidebar-box notice-item">
-                                                                <h3>Hướng dẫn đóng học phí</h3>
-                                                            </div>
-                                                        </li>
-                                                    </a>
-                                                    <a href="/noti/noti_title+id" class="noti_link">
-                                                        <li class="related-item todo-list-item">
-                                                            <div class="notice_info-div">
-                                                                <div class="notice_author-div notice_info-item">
-                                                                    <small>[Khoa Dược]</small>
-                                                                </div>
-                                                                <div class="public_date-div notice_info-item">
-                                                                    <small>22/02/2020</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sidebar-box notice-item">
-                                                                <h3>Thông báo lịch thi giữa kì khóa cũ</h3>
-                                                            </div>
-                                                        </li>
-                                                    </a>
-                                                    <a href="/noti/noti_title+id" class="noti_link">
-                                                        <li class="related-item todo-list-item">
-                                                            <div class="notice_info-div">
-                                                                <div class="notice_author-div notice_info-item">
-                                                                    <small>[Phòng Đại học]</small>
-                                                                </div>
-                                                                <div class="public_date-div notice_info-item">
-                                                                    <small>22/02/2020</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sidebar-box notice-item">
-                                                                <h3>Tạm dừng nghỉ học tại cơ sở tân phong từ ngày 20/10/2021 cho đến khi có thông báo mới</h3>
-                                                            </div>
-                                                        </li>
-                                                    </a>
-                                                    <a href="/noti/noti_title+id" class="noti_link">
-                                                        <li class="related-item todo-list-item">
-                                                            <div class="notice_info-div">
-                                                                <div class="notice_author-div notice_info-item">
-                                                                    <small>[Khoa Khoa học ứng dụng]</small>
-                                                                </div>
-                                                                <div class="public_date-div notice_info-item">
-                                                                    <small>22/02/2020</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sidebar-box notice-item">
-                                                                <h3>Ngày hội tuyển sinh khóa 25, năm học 2021-2022</h3>
-                                                            </div>
-                                                        </li>
-                                                    </a>
-                                                    <a href="/noti/noti_title+id" class="noti_link">
-                                                        <li class="related-item todo-list-item">
-                                                            <div class="notice_info-div">
-                                                                <div class="notice_author-div notice_info-item">
-                                                                    <small>[Phòng Công tác học sinh sinh viên]</small>
-                                                                </div>
-                                                                <div class="public_date-div notice_info-item">
-                                                                    <small>22/02/2020</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sidebar-box notice-item">
-                                                                <h3>Đăng kí kế hoạch học tập năm học 2021-2022</h3>
-                                                            </div>
-                                                        </li>
-                                                    </a>
+                                                <ul id="demo_noti-list" class="related-posts" data-offset="0">
+
                                                 </ul>
                                             </div>
                                             <div id="tag_cloud-2" class="widget widget_tag_cloud">
                                                 <h3 class="widget_title">
                                                     <a class="topics_link widget_header-link" id="topics_link">Topic</a>
                                                 </h3>
-                                                <div class="tagcloud">
-                                                    <a href="#"
-                                                        class="tag-cloud-link topic_tag-link">Bai tap</a>
-                                                    <a href="#"
-                                                        class="tag-cloud-link topic_tag-link">Học phí</a>
-                                                    <a href="#"
-                                                        class="tag-cloud-link topic_tag-link">LỊCH THI</a>
-                                                    <a href="#"
-                                                        class="tag-cloud-link topic_tag-link">Môn thay thế tốt nghiệp</a>
-                                                    <a href="#"
-                                                        class="tag-cloud-link topic_tag-link">Đăng kí môn học</a>
+                                                <div class="tagcloud" id="demo_tag-list">
+                                                    
                                                 </div>
                                             </div>
                                                 <!-- TDTU MAP IMAGE -->
@@ -466,163 +321,49 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="question" role="tabpanel" aria-labelledby="question-tab">
-                            <div class="card post">
-                                <div class="card-header">
-                                    <div class="title-box">
-                                        <div class="title">
-                                            <a href="#">
-                                                <h5>Title</h5>
-                                            </a>
-                                        </div>
-                                        <div class="overal-post-info-box">
-                                            <span class="clock">
-                                                <small>
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                        class="bi bi-clock-history" fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
-                                                    </svg>
-                                                    4 YEARS
-                                                </small>
-                                            </span>
-                                            <span class="view">
-                                                <small>
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye"
-                                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                                                    </svg>
-                                                    12 VIEWS
-                                                </small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="user-info-box">
-                                        <img src="images/avatar.png" alt="avatar" class="avatar">
-                                    </div>
 
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p class="question-content">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo numquam
-                                            voluptas neque sapiente ab dicta aliquam, id error vitae, fugit est quasi,
-                                            quos repellendus facilis corrupti veritatis repudiandae quaerat
-                                            voluptatibus.
-                                        </p>
-                                        <footer class="blockquote-footer">
-                                            vivo22
-                                            <cite title="Source Title">
-                                                <small><i>votuongvi2222002@gmail.com</i></small>
-                                            </cite>
-                                            <div class="hagtag-list">
-                                                <span><a href="#">#html</a></span>
-                                                <span><a href="#">#javascript</a></span>
-                                                <span><a href="#">#css</a></span>
-                                            </div>
-                                        </footer>
-                                    </blockquote>
-                                </div>
-                            </div>
                         </div>
                         <div class="tab-pane fade" id="response" role="tabpanel" aria-labelledby="response-tab">
-                            <div class="card post post_comment">
-                                <div class="card-header">
-                                    <div class="title-box">
-                                        <div class="overal-post-info-box">
-                                            <span class="like">
-                                                <small>
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                        class="bi bi-hand-thumbs-up" fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
-                                                    </svg>
-                                                    4
-                                                </small>
-                                            </span>
-                                            <span class="dislike">
-                                                <small>
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                        class="bi bi-hand-thumbs-down" fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.378 1.378 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51.136.02.285.037.443.051.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.896 1.896 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.094 2.094 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.162 3.162 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28v1c.563 0 .901.272 1.066.56.086.15.121.3.121.416 0 .12-.035.165-.04.17l-.354.353.353.354c.202.202.407.512.505.805.104.312.043.44-.005.488l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.415-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.353.352.373.714.267 1.021-.122.35-.396.593-.571.651-.653.218-1.447.224-2.11.164a8.907 8.907 0 0 1-1.094-.17l-.014-.004H9.62a.5.5 0 0 0-.595.643 8.34 8.34 0 0 1 .145 4.725c-.03.112-.128.215-.288.255l-.262.066c-.306.076-.642-.156-.667-.519-.075-1.081-.239-2.15-.482-2.85-.174-.502-.603-1.267-1.238-1.977C5.597 8.926 4.715 8.23 3.62 7.93 3.226 7.823 3 7.534 3 7.28V3.279c0-.26.22-.515.553-.55 1.293-.138 1.936-.53 2.491-.869l.04-.024c.27-.165.495-.296.776-.393.277-.096.63-.163 1.14-.163h3.5v-1H8c-.605 0-1.07.08-1.466.217a4.823 4.823 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591z" />
-                                                    </svg>
-                                                    12
-                                                </small>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="user-info-box">
-                                        <img src="images/avatar.png" alt="avatar" class="avatar">
-                                    </div>
 
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p class="question-content">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo numquam
-                                            voluptas neque sapiente ab dicta aliquam, id error vitae, fugit est quasi,
-                                            quos repellendus facilis corrupti veritatis repudiandae quaerat
-                                            voluptatibus.
-                                        </p>
-                                        <footer class="blockquote-footer">
-                                            vivo22
-                                            <cite title="Source Title">
-                                                <small><i>votuongvi2222002@gmail.com</i></small>
-                                            </cite>
-                                            <div class="hagtag-list open-cmt-icon open-icon">
-                                                <a href="#">
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16"
-                                                        class="bi bi-arrow-return-right" fill="currentColor"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </footer>
-                                    </blockquote>
-                                </div>
-                            </div>
                         </div>
                         <div class="tab-pane fade" id="deadline" role="tabpanel" aria-labelledby="deadline-tab">
-                            <ul class="list-group list-group-flush todo-list">
-                                <li class="list-group-item todo-list-item">
-                                    <span>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-text"
-                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M4 0h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H4z" />
-                                            <path fill-rule="evenodd"
-                                                d="M4.5 10.5A.5.5 0 0 1 5 10h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
-                                        </svg>
-                                        <b>
-                                            <a href="">
-                                                Họa tranh
-                                            </a>
-                                        </b>
-                                        -
-                                        <i>
-                                            <a href="">
-                                                Bai tap 1
-                                            </a>
-                                        </i>
-                                    </span>
-                                    <small class="limit-time">Due to today</small>
 
-                                </li>
-                            </ul>
                         </div>
 
+                    </div>
+                </div>
+                <div id="cmt_modal" class="w3-modal">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+                        
+                        <div class="w3-center"><br>
+                            <span id="close_cmt_modal" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                        </div>
+                    
+                        <div class="modify-modal">
+                            <div class="w3-section">
+                                <input type="hidden" id="cmtId" value="">
+                                <input id="cmt" class="w3-input w3-border w3-margin-bottom" type="text" name="cmt" required>
+                                <button id="cmt_accept" class="w3-button w3-block w3-section w3-padding">Accept</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="post_modal" class="w3-modal">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+                        <div class="w3-center"><br>
+                            <span id="close_post_modal" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                        </div>
+                    
+                        <div class="modify-modal">
+                            <div class="w3-section">
+                                <input type="hidden" id="postId" value="">
+                                <label for="postCaption"></label>
+                                <input id="postCaption" class="w3-input w3-border w3-margin-bottom" type="text" name="post" required>
+                                <label for="postLink"></label>
+                                <input id="postLink" class="w3-input w3-border w3-margin-bottom" type="text" name="post" required>
+                                <button id="post_accept" class="w3-button w3-block w3-section w3-padding">Accept</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -706,48 +447,14 @@
             </div>
         </div>
         <!-- WEB INFORMATION -->
-        <footer class="footer author-info">
-            <div class="contact-box">
-                <h3>Contact</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                        </svg>
-                        19, Nguyen Huu Tho, Tan Phong, district 7, HCM city
-                    </li>
-                    <li class="list-group-item">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z" />
-                        </svg>
-                        (84) 0123 456 78
-                    </li>
-                    <li class="list-group-item">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
-                        </svg>
-                        519h0098@student.tdtu.edu.vn
-                    </li>
-                </ul>
-            </div>
-            <div class="copyright">
-                <div class="copyright-pannel">Copyright 2020 by </div>
-                <div class="copyright-author">
-                    DeveLOVEbug <img src="images/team-icon.png" alt="team-icon">
-                </div>
-            </div>
-        </footer>
+        <%- include("./partials/footer") %>
+
     </div>
 </body>
 
 </html>
+<!-- SOCKET IO -->
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- JS ONLY -->
 <script type="text/javascript" src="javascripts/main.js"></script>
-<!-- <script src="javascripts/zabuto_calendar.min.js"></script> -->
-

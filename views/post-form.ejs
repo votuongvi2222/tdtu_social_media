@@ -6,58 +6,14 @@
 </head>
 
 <body>
+    <input type="hidden" id="noti_form_page">
+    <input type="hidden" id="department_code" value="<%= user.code %>">
     <div class="background-cover"></div>
     <div id="wrap" class="wrap-nicescroll">
         <!-- TOP NAVIGATION -->
         <%- include("./partials/topnav") %>
         <!-- MAIN NAVIGATION -->
-        <div id="header">
-            <div class="container clearfix">
-
-                <div class="row">
-                    <div class="logo col-md-4">
-                        <a href="/">
-                            <img src="images/logo.png" alt="" class="logo-default lazyloaded">
-                        </a>
-                    </div>
-                    <nav class="navigation col-md-8 hidden-xs">
-                        <div class="header-menu">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="/about">How it works?</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/noti">Notification</a>
-                                </li>
-                                <li class="nav-item menu-item-pq">
-                                    <a class="nav-link add_noti-btn" id="add_noti-btn" href="/add">Add Notification</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                    <nav class="navigation_mobile navigation_mobile_main">
-                        <div class="infocenter_mobile_click infocenter_mobile_click_close">
-                            Go to ...
-                        </div>
-                        <ul>
-                            <li>
-                                <a href="/about">How it works?</a>
-                            </li>
-                            <li>
-                                <a href="">Notification</a>
-                            </li>
-                            <li>
-                                <a href="#">Calendar</a>
-                            </li>
-                            <li class="menu-item-pq">
-                                <a id="mobile_add_noti-btn" class="add_noti-btn" href="/add">Add Notification</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                </nav>
-            </div>
-        </div>
+        <%- include("./partials/header") %>
         <!-- BREADCRUBS NAV -->
         <div class="breadcrumbs">
             <div class="container">
@@ -83,9 +39,9 @@
                     
                         <div class="page-template-template-ask_question page-content">
                             <div class="form-posts">
-                                <form-style class="form-style form-style-3 question-submit">
+                                <form-style class="form-style form-style-3 question-submit" id="noti-form_add">
                                     <div class="ask_question">
-                                        <form method="POST" action="" class="infocenter-q-form"
+                                        <form class="infocenter-q-form"
                                             enctype="multipart/form-data">
                                             <div class="infocenter_error_display display"></div>
                                             <div class="form-inputs clearfix">
@@ -106,21 +62,12 @@
                                                     <span class="infocenter-qform-desc">Please type limit score here.</span>
                                                 </p>
                                                 <p>
-                                                    <label for="video-link" class="required">
-                                                        Video links
-                                                    </label>
-                                                    <input name="video_link" type="text" id="video-link" class="the-title">
-                                                    <span class="infocenter-qform-desc">Please type video links here. (type ',' for seperation)</span>
-                                                </p>
-                                                <p>
                                                     <label for="category" class="required">
                                                         Category
                                                     </label>
                                                     <span class="styled-select">
                                                         <select name="category" id="category" class="postform">
                                                             <option >Select a category</option>
-                                                            
-                                                            <option value="" class="level-0">Bai tap</option>
                                                         </select>
                                                     </span>
                                                     <input type="text" id="add-new-category" class="the-title" placeholder="Add new topic" value>
@@ -134,60 +81,7 @@
                                                         <span class="infocenter-qform-desc">Please choose the correct category of your notification.</span>
                                                     </p>
                                                 </p>
-                                                <p>
-                                                    <label class="required">
-                                                        Limit visibility
-                                                        <span>*</span>
-                                                    </label>
-                                                    <span class="styled-check styled-select" data-toggle="modal" data-target="#staticBackdrop">
-                                                        Select people
-                                                    </span>
-                                                
-                                                    <span class="infocenter-qform-desc">Select people who will be informed about this notification.</span>
-                                                </p>
-                                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="staticBackdropLabel">Select students</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <ul class="list-group assignment-visibility student-list">
-                                                                    <li class="list-group-item" aria-disabled="true">
-                                                                        <input class="to-check" type="checkbox" id="selectAllAss">
-                                                                        <label for="selectAllAss">
-                                                                            <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                                            All people
-                                                                        </label>
-                                                                    </li>
-                                                                    
-                                                                    <li class="list-group-item">
-                                                                        <input class="to-check" name="check_list_visibility[]" type="checkbox" id="">
-                                                                        <label>
-                                                                            <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                                            Khoa CNTT
-                                                                        </label>
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <input class="to-check" name="check_list_visibility[]" type="checkbox" id="">
-                                                                        <label>
-                                                                            <img class="avatar" src="images/avatar.png" alt="avatar">
-                                                                            Khoa Khoa học ứng dụng
-                                                                        </label>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn close_limit_people-btn" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn accept_limit_people-btn" id="accept_limit_people-btn">Accept</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <label>Attachment</label>
+                                                <!-- <label>Attachment</label>
                                                 <div class="question-multiple-upload">
                                                     <div class="clearfix"></div>
                                                     <p class="form-submit add_poll">
@@ -204,7 +98,7 @@
                                                         <li class='poll_li_1'>
                                                             <div class='poll-li'>
                                                                 <div class='fileinputs'> 
-                                                                    <input type='file' class='file' name='files[]' multiple>
+                                                                    <input type='file' class='file notiFiles' name='notiFiles' multiple>
                                                                     <div class='fakefile'> 
                                                                         <button type='button' class='button small margin_0'>Select file</button>
                                                                         <span>
@@ -228,9 +122,8 @@
                                                             
                                                     
                                                     <p id="files-detail"></p>
-                                                    <!-- <script> var next_attachment = 1;</script> -->
                                                     <div class="clearfix"></div>
-                                                </div>
+                                                </div> -->
 
                                             </div>
                                             <div>
@@ -250,46 +143,6 @@
                                                                     <div class="content_editor_focus-line"></div>
                                                                 </div>
                                                                 <div class="editor-toolbar" role="toolbar">
-                                                                    <div role="button" class="bold-btn toolbar-btn" aria-label="Bold" tabindex="0" data-toggle="tooltip" title="Bold" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_bold-label hidden-toolbar-label"></div>
-                                                                        <span class="text_bold-label text-toolbar-label">
-                                                                            <span class="toolbar-btn-icon">
-                                                                                <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_bold</span>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div role="button" class="italic-btn toolbar-btn" aria-label="Italic" tabindex="-1" data-toggle="tooltip" title="Italic" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_italic-label hidden-toolbar-label"></div>
-                                                                        <span class="text_italic-label text-toolbar-label">
-                                                                            <span class="toolbar-btn-icon">
-                                                                                <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_italic</span>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div role="button" class="underline-btn toolbar-btn" aria-label="Underline" tabindex="-1" data-toggle="tooltip" title="Underline" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_underline-label hidden-toolbar-label"></div>
-                                                                        <span class="text_underline-label text-toolbar-label">
-                                                                            <span class="toolbar-btn-icon">
-                                                                                <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_underlined</span>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div role="button" class="bulleted_list-btn toolbar-btn" aria-label="Bulleted list" tabindex="-1" data-toggle="tooltip" title="Bulleted list" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_bulleted_list-label hidden-toolbar-label"></div>
-                                                                        <span class="text_bulleted_list-label text-toolbar-label">
-                                                                            <span class="toolbar-btn-icon">
-                                                                                <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_list_bulleted</span>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div role="button" class="remove_formatting-btn toolbar-btn" aria-label="Remove formatting" tabindex="-1" data-toggle="tooltip" title="Remove formatting" aria-pressed="false" data-toggleable="" data-tooltip-position="top" data-tooltip-vertical-offset="12" data-tooltip-horizontal-offset="0">
-                                                                        <div class="hidden_remove_formatting-label hidden-toolbar-label"></div>
-                                                                        <span class="text_remove_formatting-label text-toolbar-label">
-                                                                            <span class="toolbar-btn-icon">
-                                                                                <span class="text-toolbar-btn-icon material-icon" aria-hidden="true">format_clear</span>
-                                                                            </span>
-                                                                        </span>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -312,9 +165,6 @@
                                 </form-style>
                             </div>
                         </div>
-                            <div class="alert alert-danger" role="alert">
-                                error
-                            </div>
                     </div>
                     <div class="col-md-4 sidebar">
                         <div id="lastest_noti-widget" class="widget noti-widget">
@@ -485,11 +335,14 @@
                 </div>
             </div>
         </div>
+        <!-- WEB INFORMATION -->
+        <%- include("./partials/footer") %>
     </div>
 </body>
 
 </html>
+<!-- SOCKET IO -->
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- JS ONLY -->
 <script type="text/javascript" src="javascripts/main.js"></script>
-<!-- <script src="javascripts/zabuto_calendar.min.js"></script> -->
-

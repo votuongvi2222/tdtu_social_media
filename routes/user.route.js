@@ -8,29 +8,6 @@ var Department = require('../models/department'),
     userControllers = require('../controllers/user.controller'),
     {ensureAuth, ensureGuest} = require('../middlewares/checkAccountAuth.middleware')
 
-//  @desc Load home page
-//  @route GET /
-router.get('/', ensureAuth, userControllers.loadHomePage);
-
-//  @desc Load login page
-//  @route GET /login
-router.get('/login', ensureGuest, userControllers.loadLoginPage);
-
-//  @desc Load login page
-//  @route GET /login
-router.post('/login', userControllers.login);
-
-//  @desc Load form to add new notice
-//  @route GET /add
-router.get('/add', ensureAuth, userControllers.loadPostFormPage);
-
-//  @desc Load instruction page
-//  @route GET /about
-router.get('/about', ensureAuth, userControllers.loadAboutPage);
-
-//  @desc Load notification page (all noti)
-//  @route GET /noti
-router.get('/noti', ensureAuth, userControllers.loadNotiPagePerDep);
 var departments = {
   '0': 'Khoa Ngoại ngữ',
   '1': 'Khoa Mỹ thuật công nghiệp',
@@ -63,43 +40,70 @@ var departments = {
   'X': 'Viện chính sách kinh tế và kinh doanh',
   'Y': 'Khoa giáo dục quốc tế'
 }
-router.get('/init', (req, res) => {
-  new Role({
-    name: 'student',
-    roleCode: 1
-  }).save()
-  new Role({
-    name: 'department',
-    roleCode: 2
-  }).save()
-  new Role({
-    name: 'admin',
-    roleCode: 3
-  }).save()
+
+router.get('/init', async (req, res) => {
   Object.keys(departments)
-  .forEach(function eachKey(code) { 
+  .forEach(async function eachKey(code) { 
     console.log('code: ' + code)
     console.log('name: ' + departments[code])
     var username = code+randomstring.generate(6)
-    departmentAccount = new Account({
+    const departmentAccount = new Account({
       username: username,
       hashedPassword: bcrypt.hashSync(username, 10),
+      avatar: "images/avatar.png",
       roleId: 2
     })
-    departmentAccount.save((err, acc) => {
-      // if(err) return res.send(500, 'db account err')
-      new Department({
+    await departmentAccount.save()
+    const department = new Department({
         name: departments[code],
         departmentCode: code,
-        accountId: [acc._id],
-        responsibilities: [code]
-      }).save((err, dep) => {
-        // if(err) return res.send(500, 'db department err')
-        console.log(dep)
-      })
+        accountId: departmentAccount._id,
+        responsibilities: code
     })
+    await department.save();
+
+    console.log(department)
   });
   res.send('ok')
+
 })
+    
+//  @desc Load home page
+//  @route GET /
+router.get('/', ensureAuth, userControllers.loadHomePage);
+
+//  @desc Load login page
+//  @route GET /login
+router.get('/login', ensureGuest, userControllers.loadLoginPage);
+
+//  @desc Load login page
+//  @route GET /login
+router.post('/login', userControllers.login);
+
+//  @desc Load form to add new notice
+//  @route GET /add
+router.get('/add', ensureAuth, userControllers.loadPostFormPage);
+
+//  @desc Load instruction page
+//  @route GET /about
+router.get('/about', ensureAuth, userControllers.loadAboutPage);
+
+//  @desc Load notification page (all noti)
+//  @route GET /noti
+router.get('/noti', ensureAuth, userControllers.loadAllNotiPage);
+
+//  @desc Load notification page per dep
+//  @route GET /noti
+router.get('/notiper', ensureAuth, userControllers.loadNotiPagePerDep);
+
+// router.post('/addNoti', ensureAuth, userControllers.addNoti);
+
+router.get('/notidetail', ensureAuth, userControllers.loadNotiDetail);
+
+
+//  @desc Load notification page (all noti)
+//  @route GET /noti
+router.get('/:id', ensureAuth, userControllers.loadPersonalPageById);
+
 
 module.exports = router;

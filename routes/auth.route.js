@@ -3,6 +3,7 @@ var express = require('express')
 var passport = require('passport')
 var router = express.Router()
 
+var studentApis = require('../apis/student/student.api.method');
 
 // @desc GG Auth
 // @route GET /auth/google
@@ -18,11 +19,24 @@ router.get('/google/callback',
     { failureRedirect: '/login' }), 
     (req, res) => {
         // console.log('flash:-----------' + req._account)
-        req.session.username = req._account.username
-        req.session.roleId = req._account.roleId
-        req.session.user = req._student
-        req.session.isAuth = true;
-        res.redirect('/')
+        var sid = req._student._id;
+        console.log('------------------INNNNN--------------------')
+        console.log('id: ' + sid)
+        studentApis.getStudent(sid, (student) => {
+            // ==== Assign session for authentication
+            console.log('------------------INNNNN 222222222222222--------------------')
+
+            req.session.user = student
+            req.session.roleId = req._account.roleId
+            req.session.isAuth = true;
+            console.log('AUTH----------')
+            console.log(student)
+            // ==== GET /
+            return res.redirect('/');
+        }, (err) => {
+            console.log('------------------INnnn11111111111111112--------------------')
+            return res.redirect('/login')
+        })
     }
 );
 

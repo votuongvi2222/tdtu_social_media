@@ -1,7 +1,9 @@
 var Student = require('../../models/student'),
     Role = require('../../models/role'),
     Department = require('../../models/department'),
+    Cls = require('../../models/class'),
     Account = require('../../models/account'),
+    moment = require('moment'),
     bcrypt = require('bcrypt');
 
 var getStudents =  async (req, res) => {
@@ -10,6 +12,7 @@ var getStudents =  async (req, res) => {
         const studentsInfo = await Promise.all(
             students.map(async (student) => {
                 const faculty = await Department.findOne({departmentCode: student.facultyCode})
+                const cls = await Cls.findOne({classId: student.classId})
                 const account = await Account.findById(student.accountId);
 
                 return {
@@ -18,15 +21,15 @@ var getStudents =  async (req, res) => {
                     fullname: student.fullname, // gg displayname
                     studentId: student.studentId,
                     studentEmail: student.studentEmail, // gg email
-                    classId: student.classId || '',
-                    faculty: faculty.name, // department code
+                    class: cls,
+                    faculty: faculty, // department code
                     birthday: student.birthday || '', // gg birthdate
                     account: {
                         id: account._id,
-                        username: account.username
+                        username: account.username,
+                        avatar: account.avatar
                     },
                     gender: student.gender || '', // gg gender
-                    avatar: student.avatar || '', // gg coverPhoto
                     schoolYear: student.schoolYear, // the year start
                     program: student.program, // high quaity or standar
                     phoneNumber: student.phoneNumber || '',
@@ -53,15 +56,49 @@ var getStudentById = async (req, res) => {
             fullname: student.fullname, // gg displayname
             studentId: student.studentId,
             studentEmail: student.studentEmail, // gg email
-            classId: student.classId || '',
-            faculty: faculty.name, // department code
+            class: '',
+            faculty: faculty, // department code
             birthday: student.birthday || '', // gg birthdate
             account: {
                 id: account._id,
-                username: account.username
+                username: account.username,
+                avatar: account.avatar
             },
             gender: student.gender || '', // gg gender
-            avatar: student.avatar || '', // gg coverPhoto
+            schoolYear: student.schoolYear, // the year start
+            program: student.program, // high quaity or standar
+            phoneNumber: student.phoneNumber || '',
+            address: student.address || '', // gg places lived
+            hometown: student.hometown || '',
+            relatives: student.relatives || []
+        })
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
+
+var getStudentByAccId = async (req, res) => {
+    try {
+        const student = await Student.findOne({accountId: req.params.id});
+        console.log(student)
+        const faculty = await Department.findOne({departmentCode: student.facultyCode})
+        const account = await Account.findById(student.accountId);
+        return res.json({
+            id: student._id,
+            googleId: student.googleId,// gg id
+            fullname: student.fullname, // gg displayname
+            studentId: student.studentId,
+            studentEmail: student.studentEmail, // gg email
+            class: '',
+            faculty: faculty, // department code
+            birthday: student.birthday || '', // gg birthdate
+            account: {
+                id: account._id,
+                username: account.username,
+                avatar: account.avatar
+            },
+            gender: student.gender || '', // gg gender
             schoolYear: student.schoolYear, // the year start
             program: student.program, // high quaity or standar
             phoneNumber: student.phoneNumber || '',
@@ -80,36 +117,36 @@ var putStudentById = async (req, res) => {
         const student = await Student.findById(req.params.id);
         const faculty = await Department.findOne({departmentCode: req.body.facultyCode});
         const account = await Account.findById(req.body.accountId);
-        student.fullname = req.body.fullname || '';
-        student.studentId = req.body.studentId || '';
-        student.studentEmail = req.body.studentEmail || '';
-        student.birthday = req.body.birthday || '';
-        student.classId = req.body.classId || '';
-        student.accountId = account._id;
-        student.gender = req.body.gender || '';
-        student.avatar = req.body.avatar || '';
-        student.schoolYear = req.body.schoolYear || '';
-        student.program = req.body.program || '';
-        student.phoneNumber = req.body.phoneNumber || '';
-        student.address = req.body.address || '';
-        student.hometown = req.body.hometown || '';
-        student.relatives = req.body.relatives || [];
-        student.facultyCode = faculty.departmentCode;
+        student.fullname = req.body.fullname || student.fullname;
+        student.studentId = req.body.studentId || student.studentId;
+        student.studentEmail = req.body.studentEmail || student.studentEmail;
+        student.birthday = req.body.birthday || student.birthday;
+        student.classId = '';
+        student.accountId = account._id || student.accountId;
+        student.gender = req.body.gender || student.gender;
+        student.schoolYear = req.body.schoolYear || student.schoolYear;
+        student.program = req.body.program || student.program;
+        student.phoneNumber = req.body.phoneNumber || student.phoneNumber;
+        student.address = req.body.address || student.address;
+        student.hometown = req.body.hometown || student.hometown;
+        student.relatives = req.body.relatives || student.relatives;
+        student.facultyCode = faculty.departmentCode || student.facultyCode;
+        await student.save()
         return res.json({
             id: student._id,
             googleId: student.googleId,// gg id
             fullname: student.fullname, // gg displayname
             studentId: student.studentId,
             studentEmail: student.studentEmail, // gg email
-            class: student.classId,
-            faculty: faculty.name, // department code
+            class: '',
+            faculty: faculty, // department code
             birthday: student.birthday, // gg birthdate
             account: {
                 id: account._id,
-                username: account.username
+                username: account.username,
+                avatar: account.avatar
             },
             gender: student.gender, // gg gender
-            avatar: student.avatar, // gg coverPhoto
             schoolYear: student.schoolYear, // the year start
             program: student.program, // high quaity or standar
             phoneNumber: student.phoneNumber,
@@ -130,22 +167,21 @@ var postStudent = async (req, res) => {
         const faculty = await Department.findOne({departmentCode: req.body.facultyCode});
         const account = await Account.findById(req.body.accountId);
         const student = new Student({
-            googleId: req.body.googleId,// gg id
-            fullname: req.body.fullname, // gg displayname
-            studentId: req.body.studentId,
-            studentEmail: req.body.studentEmail, // gg email
-            classId: req.body.classId,
-            facultyCode: faculty.departmentCode, // department code
-            birthday: req.body.birthday, // gg birthdate
-            accountId: account._id,
-            gender: req.body.gender, // gg gender
-            avatar: req.body.avatar, // gg coverPhoto
-            schoolYear: req.body.schoolYear, // the year start
-            program: req.body.program, // high quaity or standar
-            phoneNumber: req.body.phoneNumber,
-            address: req.body.address, // gg places lived
-            hometown: req.body.hometown,
-            relatives: req.body.relatives,
+            googleId: req.body.googleId || '',// gg id
+            fullname: req.body.fullname || '', // gg displayname
+            studentId: req.body.studentId || '',
+            studentEmail: req.body.studentEmail || '', // gg email
+            classId: '',
+            facultyCode: faculty.departmentCode || '', // department code
+            birthday: req.body.birthday || new Date().toISOString().slice(0, 10), // gg birthdate
+            accountId: account._id || '',
+            gender: req.body.gender || '', // gg gender
+            schoolYear: req.body.schoolYear || parseInt(new Date().getFullYear), // the year start
+            program: req.body.program || '', // high quaity or standar
+            phoneNumber: req.body.phoneNumber || '',
+            address: req.body.address || '', // gg places lived
+            hometown: req.body.hometown || '',
+            relatives: req.body.relatives || [],
         });
         await student.save();
         return res.json({
@@ -154,15 +190,15 @@ var postStudent = async (req, res) => {
             fullname: student.fullname, // gg displayname
             studentId: student.studentId,
             studentEmail: student.studentEmail, // gg email
-            class: student.classId,
-            faculty: faculty.name, // department code
+            class: '',
+            faculty: faculty, 
             birthday: student.birthday, // gg birthdate
             account: {
                 id: account._id,
-                username: account.username
+                username: account.username,
+                avatar: account.avatar
             },
             gender: student.gender, // gg gender
-            avatar: student.avatar, // gg coverPhoto
             schoolYear: student.schoolYear, // the year start
             program: student.program, // high quaity or standar
             phoneNumber: student.phoneNumber,
@@ -192,6 +228,7 @@ var deleteStudentById = async (req, res) => {
 module.exports = {
     deleteStudentById: deleteStudentById,
     getStudentById: getStudentById,
+    getStudentByAccId, getStudentByAccId,
     getStudents: getStudents,
     putStudentById: putStudentById,
     postStudent: postStudent

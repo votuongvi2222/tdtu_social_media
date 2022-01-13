@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include("./partials/head") %>
+</head>
+
+<body>
+    <input type="hidden" id="noti_page">
+    <div class="background-cover"></div>
+    <div id="wrap" class="wrap-nicescroll">
+        <!-- TOP NAVIGATION -->
+        <%- include("./partials/topnav") %>
+        <!-- MAIN NAVIGATION -->
+        <%- include("./partials/header") %>
+
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 row">
+                        <h1 class="col-md-6">
+
+                        <span class="class-alter-icon">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-three-dots-vertical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+
+                        </span>
+                        Notifications
+                        </h1>
+                        <div class="crumbs col-md-6">
+                            <a href="/">Home</a>
+                            <span class="crumbs-span">/</span>
+                            <span class="current">
+                            Notifications
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="q-main-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-md-11 noti-tabs">
+                        <ul class="tab-title nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                            <li class="nav-item active" role="presentation">
+                                <a class="nav-link active" id="stream-tab" data-toggle="tab" href="#stream" role="tab"
+                                    aria-controls="stream" aria-selected="true">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-collection-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7z"/>
+                                        <path fill-rule="evenodd" d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
+                                    </svg>
+                                    <span class="hidden-xs">Stream</span>
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="topics-tab" data-toggle="tab" href="#topics" role="tab"
+                                    aria-controls="topics" aria-selected="false">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                    <span class="hidden-xs">Topics</span>    
+                                </a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="departments-tab" data-toggle="tab" href="#departments" role="tab"
+                                    aria-controls="topics" aria-selected="false">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                    <span class="hidden-xs">Departments</span>    
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active class-tab" id="stream" role="tabpanel" aria-labelledby="stream-tab">
+
+                                <div class="accordion noti_stream-list noti-list" id="notiStream">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="topics" role="tabpanel" aria-labelledby="topics-tab">
+                                <div class="row">
+                                    <div class="col-md-3 hidden-xs">
+                                        <div class="topic-nav" id="topicPanel">
+                                            <h3>All topics</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="accordion topic_stream-list noti-list" id="topic_container">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade class-tab" id="departments" role="tabpanel" aria-labelledby="departments-tab">
+                                <div class="row">
+                                    <div class="col-md-3 hidden-xs">
+                                        <div class="topic-nav" id="depPanel">
+                                            <h3>All departments</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="accordion topic_stream-list noti-list" id="department_container">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+        <!-- WEB INFORMATION -->
+        <%- include("./partials/footer") %>
+    </div>
+</body>
+
+</html>
+<!-- SOCKET IO -->
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<!-- JS ONLY -->
+<script type="text/javascript" src="javascripts/main.js"></script>

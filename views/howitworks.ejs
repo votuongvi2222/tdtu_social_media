@@ -11,53 +11,7 @@
         <!-- TOP NAVIGATION -->
         <%- include("./partials/topnav") %>
         <!-- MAIN NAVIGATION -->
-        <div id="header">
-            <div class="container clearfix">
-
-                <div class="row">
-                    <div class="logo col-md-4">
-                        <a href="/">
-                            <img src="images/logo.png" alt="" class="logo-default lazyloaded">
-                        </a>
-                    </div>
-                    <nav class="navigation col-md-8 hidden-xs">
-                        <div class="header-menu">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="/about">How it works?</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/noti">Notification</a>
-                                </li>
-                                <li class="nav-item menu-item-pq">
-                                    <a class="nav-link add_noti-btn" id="add_noti-btn" href="/add">Add Notification</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                    <nav class="navigation_mobile navigation_mobile_main">
-                        <div class="infocenter_mobile_click infocenter_mobile_click_close">
-                            Go to ...
-                        </div>
-                        <ul>
-                            <li>
-                                <a href="/about">How it works?</a>
-                            </li>
-                            <li>
-                                <a href="">Notification</a>
-                            </li>
-                            <li>
-                                <a href="#">Calendar</a>
-                            </li>
-                            <li class="menu-item-pq">
-                                <a id="mobile_add_noti-btn" class="add_noti-btn" href="/add">Add Notification</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                </nav>
-            </div>
-        </div>
+        <%- include("./partials/header") %>
         <!-- BREADCRUMBS -->
         <div class="breadcrumbs">
             <div class="container">
@@ -78,11 +32,11 @@
                 <div class="row">
                     <div class="ins-step col-md-4">
                         <img src="images/step1.png" alt="step1">
-                        <div>1. Create An Account</div>
+                        <div>1. Share your status</div>
                     </div>
                     <div class="ins-step col-md-4">
                         <img src="images/step2.png" alt="step2">
-                        <div>2. Post Your Question</div>
+                        <div>2. Post comment/question </div>
                     </div>
                     <div class="ins-step col-md-4">
                         <img src="images/step3.png" alt="step3">
@@ -91,40 +45,14 @@
                 </div>
             </div>
         </div>
-        <footer class="footer author-info">
-            <div class="contact-box">
-                <h3>Contact</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg> 
-                    19, Nguyen Huu Tho, Tan Phong, district 7, HCM city
-                    </li>
-                    <li class="list-group-item">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
-                    </svg>
-                    (84) 0123 456 78
-                    </li>
-                    <li class="list-group-item">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
-                    </svg> 
-                    519h0098@student.tdtu.edu.vn
-                </ul>
-            </div>
-            <div class="copyright">
-                <div class="copyright-pannel">Copyright 2020 by </div>
-                <div class="copyright-author"> 
-                    DeveLOVEbug <img src="images/team-icon.png" alt="team-icon"> 
-                </div>
-            </div>
-        </footer>
+        <!-- WEB INFORMATION -->
+        <%- include("./partials/footer") %>
     </div>
 </body>
 
 </html>
+<!-- SOCKET IO -->
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- JS ONLY -->
 <script type="text/javascript" src="javascripts/main.js"></script>
-<!-- <script src="javascripts/zabuto_calendar.min.js"></script> -->

@@ -10,8 +10,27 @@ var departmentSchema = mongoose.Schema({
         unique: true,
         required: true
     },
-    accountId: [String],
-    responsibilities: [String], // department codes
+    location: {
+        type: String,
+    },
+    email: {
+        type: String,
+        unique: true,
+    },
+    website: {
+        type: String
+    },
+    phoneNumber: {
+        type: String,
+        unique: true
+    },
+    foundedYear: Number,
+    accountId: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    responsibilities: String, // department codes
 }, { timestamps: true });
 var Department = mongoose.model('Department', departmentSchema);
 module.exports = Department;

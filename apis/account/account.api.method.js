@@ -1,4 +1,5 @@
-let url = 'https://tdtusocialmedia.herokuapp.com/api' | 'http://127.0.0.1:3000/api'
+require('dotenv').config();
+let url = process.env.DOMAIN_URL
 const fetch = require ("cross-fetch")
 
 function getAccounts(success, error){

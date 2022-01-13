@@ -3,6 +3,7 @@ var router = express.Router();
 var studentApis = require('./student.api')
 /* GET home page. */
 router.get('/students', studentApis.getStudents);
+router.get('/student/acc/:id', studentApis.getStudentByAccId);
 router.get('/student/:id', studentApis.getStudentById);
 router.post('/student', studentApis.postStudent);
 router.put('/student/:id', studentApis.putStudentById);

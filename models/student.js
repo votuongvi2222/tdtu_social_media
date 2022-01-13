@@ -48,7 +48,7 @@ var studentSchema = mongoose.Schema({
     relatives: [{
         name: String,
         relationship: String,
-        phoneNumber: Number,
+        phoneNumber: String,
         job: String,
     },],
 }, { timestamps: true });

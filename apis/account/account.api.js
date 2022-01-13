@@ -10,6 +10,7 @@ var getAccounts = (req, res) => {
             return {
                 id: account._id,
                 username: account.username,
+                avatar: account.avatar,
                 createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                 updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
@@ -26,6 +27,7 @@ var getAccountById = (req, res) => {
         return res.json({
             id: account._id,
             username: account.username,
+            avatar: account.avatar,
             createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
             updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
             role: account.roleId
@@ -38,15 +40,16 @@ var putAccountById = (req, res) => {
         if(error) return res.send(500, 'Error occurred: Database error!');
         if(!account) return res.send(404, 'Account id is not found!');
 
-        account.username = req.body.username;
-        account.hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        account.roleId = req.body.roleId;
-        account.avatar = req.body.avatar;
+        account.username = req.body.username || account.username;
+        account.hashedPassword = bcrypt.hashSync(req.body.password, 10) || account.hashedPassword;
+        account.roleId = req.body.roleId || account.roleId;
+        account.avatar = req.body.avatar || account.avatar;
         account.save((error, account)  => {
             if(error) return res.send(500, 'Error occurred: Database error!');
             return res.json({
                 id: account._id,
                 username: account.username,
+                avatar: account.avatar,
                 createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                 updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
@@ -66,6 +69,7 @@ var postAccount = (req, res) => {
         return res.json({
             id: account._id,
             username: account.username,
+            avatar: account.avatar,
             createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
             updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
             role: account.roleId
@@ -82,6 +86,7 @@ var deleteAccountById = (req, res) => {
             return res.json({
                 id: account._id,
                 username: account.username,
+                avatar: account.avatar,
                 createdTime: moment(account.createAt).format("dddd, MMMM Do YYYY, h:mm:ss a"),
                 updatedTime: moment(account.updatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"), 
                 role: account.roleId
