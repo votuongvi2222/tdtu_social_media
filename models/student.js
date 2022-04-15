@@ -40,7 +40,6 @@ var studentSchema = mongoose.Schema({
         required: true
     }, // high quaity or standar
     phoneNumber: {
-        unique: true,
         type: String
     },
     address: String, // gg places lived

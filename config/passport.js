@@ -71,6 +71,14 @@ module.exports = function(passport) {
                             console.log(err)
                             return done(null, null);
                         }
+                        console.log(profile.id)
+                        console.log(profile.displayName)
+                        console.log(studentId)
+                        console.log(profile.emails[0].value)
+                        console.log(studentId.substring(0,1))
+                        console.log(profile.gender)
+                        console.log(studentId.substring(1,3))
+                        console.log(program)
                         new Student({
                             googleId: profile.id,// gg id
                             fullname: profile.displayName || profile._json.name, // gg displayname
